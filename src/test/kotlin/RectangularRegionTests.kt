@@ -127,7 +127,7 @@ class RectangularRegionTests {
         assertEquals("Cell(row=0, column=2)", region(0..0, 2).toString())
         assertEquals("Cell(row=2, column=3)..Cell(row=4, column=5)", region(2..4, 3..5).toString())
         assertEquals("SheetRegion", region(allIndexes, allIndexes).toString())
-        assertEquals("∅", region(1..0.0, allIndexes).toString())
+        assertEquals("∅", region(1..0.toBigInteger(), allIndexes).toString())
     }
 
     private fun borders() {
@@ -213,8 +213,8 @@ class RectangularRegionTests {
 
     private fun `hash code`() {
         assertTrue(EmptyRegion.hashCode() == EmptyRegion.hashCode())
-        assertTrue(region(2..2, 3..0.0).hashCode() == region(3..0.0, 2..Infinity).hashCode())
-        assertTrue(region(2..2, 3..0.0).hashCode() == EmptyRegion.hashCode())
+        assertTrue(region(2..2, 3..0.toBigInteger()).hashCode() == region(3..0.toBigInteger(), 2..Infinity).hashCode())
+        assertTrue(region(2..2, 3..0.toBigInteger()).hashCode() == EmptyRegion.hashCode())
         assertTrue(region(2..3, 4..5).hashCode() == region(2..3, 4..5).hashCode())
         assertFalse(region(2..3, 4..6).hashCode() == region(2..3, 4..5).hashCode())
         assertFalse(region(2..3, 4..6).hashCode() == region(2..3, 4..5).hashCode())
@@ -228,8 +228,8 @@ class RectangularRegionTests {
         @Suppress("ReplaceCallWithBinaryOperator")
         assertFalse(EmptyRegion.equals(null))
         assertTrue(EmptyRegion == EmptyRegion)
-        assertTrue(region(2..2, 3..0.0) == region(3..0.0, 2..Infinity))
-        assertSame(EmptyRegion, region(2..2, 3..0.0))
+        assertTrue(region(2..2, 3..0.toBigInteger()) == region(3..0.toBigInteger(), 2..Infinity))
+        assertSame(EmptyRegion, region(2..2, 3..0.toBigInteger()))
         assertTrue(region(2..3, 4..5) == region(2..3, 4..5))
         assertFalse(region(2..3, 4..6) == region(2..3, 4..5))
         assertFalse(region(2..3, 4..6) == region(2..3, 4..5))

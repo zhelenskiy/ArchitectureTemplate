@@ -79,11 +79,17 @@ operator fun BigInteger.compareTo(number: Number): Int = when (number) {
 }
 
 
-operator fun Number.rangeTo(number: Number) = range(this, number)
+operator fun Number.rangeTo(number: BigInteger) = range(this, number)
+operator fun BigInteger.rangeTo(number: Number) = range(this, number)
+operator fun BigInteger.rangeTo(number: BigInteger) = range(this, number)
 
-infix fun Number.until(number: Number) = range(this, number.toBigInteger().dec())
+infix fun Number.until(number: BigInteger) = range(this, number.toBigInteger().dec())
+infix fun BigInteger.until(number: Number) = range(this, number.toBigInteger().dec())
+infix fun BigInteger.until(number: BigInteger) = range(this, number.toBigInteger().dec())
 
-infix fun Number.downTo(number: Number) = progression(this, number, -BigInteger.ONE)
+infix fun Number.downTo(number: BigInteger) = progression(this, number, -BigInteger.ONE)
+infix fun BigInteger.downTo(number: Number) = progression(this, number, -BigInteger.ONE)
+infix fun BigInteger.downTo(number: BigInteger) = progression(this, number, -BigInteger.ONE)
 
 
 object Infinity {
@@ -96,8 +102,8 @@ object NegativeInfinity {
     operator fun unaryMinus() = Infinity
 }
 
-infix fun Number.until(infinity: Infinity) = range(this.toBigInteger(), null)
+infix fun Number.until(@Suppress("UNUSED_PARAMETER") infinity: Infinity) = range(this.toBigInteger(), null)
 
-operator fun Number.rangeTo(infinity: Infinity) = range(this.toBigInteger(), null)
+operator fun Number.rangeTo(@Suppress("UNUSED_PARAMETER") infinity: Infinity) = range(this.toBigInteger(), null)
 
-infix fun Number.downTo(infinity: NegativeInfinity) = progression(this, null, -BigInteger.ONE)
+infix fun Number.downTo(@Suppress("UNUSED_PARAMETER") infinity: NegativeInfinity) = progression(this, null, -BigInteger.ONE)

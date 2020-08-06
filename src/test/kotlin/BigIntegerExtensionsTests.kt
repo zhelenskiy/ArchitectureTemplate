@@ -7,7 +7,7 @@ class BigIntegerExtensionsTests {
     fun `'to'-functions`() {
         val big = BigInteger.ONE
         assertSame(big, big.toBigInteger())
-        assertEquals(big, 1.0.toBigInteger())
+        assertEquals(big, 1.toBigInteger().toBigInteger())
     }
 
     @Test
@@ -66,14 +66,17 @@ class BigIntegerExtensionsTests {
         assertEquals(range(1, null), 1..Infinity)
         assertEquals(progression(1, null, 1), 1..Infinity)
         assertEquals(progression(1, null, 1), 1..Infinity)
-        assertEquals(progression(1, 5, 1), 1..5.0)
+        assertEquals(progression(1, 5, 1), 1..5.toBigInteger())
+        assertEquals(progression(1, 5, 1), 1.toBigInteger()..5)
 
         assertEquals(range(1, null), 1 until Infinity)
         assertEquals(progression(1, null, 1), 1 until Infinity)
         assertEquals(progression(1, null, 1), 1 until Infinity)
-        assertEquals(progression(1, 5, 1), 1 until 6L)
+        assertEquals(progression(1, 5, 1), 1 until 6.toBigInteger())
+        assertEquals(progression(1, 5, 1), 1.toBigInteger() until 6)
 
-        assertEquals(progression(5, 1, -1), 5L downTo 1)
+        assertEquals(progression(5, 1, -1), 5L downTo 1.toBigInteger())
+        assertEquals(progression(5, 1, -1), 5L.toBigInteger() downTo 1)
         assertEquals(progression(5, null, -1), 5L downTo NegativeInfinity)
         assertEquals(progression(5, null, -1), 5L downTo +NegativeInfinity)
         assertEquals(progression(5, null, -1), 5L downTo -Infinity)

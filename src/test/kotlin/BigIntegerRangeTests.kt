@@ -105,6 +105,6 @@ class BigIntegerRangeTests {
         assertTrue(range(1..5).take(5) is BigIntegerRange)
         assertEquals(range(1..5), range(1..5).take(5))
 
-        assertEquals("[2..3]", (2..3.0).toString())
+        assertEquals("[2..3]", (2..3.toBigInteger()).toString())
     }
 }
