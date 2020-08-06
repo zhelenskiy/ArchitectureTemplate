@@ -7,7 +7,7 @@ import kotlin.comparisons.naturalOrder
 
 class BigIntegerProgressionTests {
     @Test
-    fun `Empty progression`() {
+    fun `empty progression`() {
         assertTrue(EmptyRange.isEmpty())
         assertFalse(EmptyRange.isNotEmpty())
         assertTrue((1..Infinity).isNotEmpty())
@@ -20,8 +20,9 @@ class BigIntegerProgressionTests {
         assertTrue((1..1.0) !is EmptyRange)
         assertTrue((1..2.0) !is EmptyRange)
     }
+
     @Test
-    fun `Right instance`(){
+    fun `right instance`() {
         assertTrue(1..1.0 step 3 is BigIntegerRange)
         assertTrue(1..1.0 step 3 is SingleRange)
         assertTrue(1..1.0 step 3 !is EmptyRange)
@@ -41,7 +42,7 @@ class BigIntegerProgressionTests {
     }
 
     @Test
-    fun `Last element`() {
+    fun `last element`() {
         assertNull((1..Infinity).last)
         assertNotNull((1..3.0).last)
         assertThrows(
@@ -76,7 +77,7 @@ class BigIntegerProgressionTests {
     }
 
     @Test
-    fun `(In)finiteness`() {
+    fun `(in)finiteness`() {
         assertTrue((1..Infinity).isInfinite())
         assertFalse((1..Infinity).isFinite())
         assertTrue((1 downTo -Infinity).isInfinite())
@@ -136,7 +137,7 @@ class BigIntegerProgressionTests {
     }
 
     @Test
-    fun `Secondary constructors`() {
+    fun `secondary constructors`() {
         val res = progression(BigInteger.ONE, BigInteger.TEN, BigInteger.TWO)
         assertEquals(res, progression(1..10 step 2))
         assertEquals(res, progression(1L..10L step 2))
@@ -161,7 +162,7 @@ class BigIntegerProgressionTests {
     }
 
     @Test
-    fun `Simple iterating`() {
+    fun `simple iterating`() {
         assertIterableEquals((1..3).map { it.toBigInteger() }, (1..3.0).asIterable())
         assertIterableEquals((1..3).map { it.toBigInteger() }, (1..Infinity).take(3).asIterable())
         assertIterableEquals(listOf<BigInteger>(), (1..0.0).asIterable())
@@ -171,7 +172,7 @@ class BigIntegerProgressionTests {
     }
 
     @Test
-    fun `Average number`() {
+    fun `average number`() {
         assertEquals(Double.POSITIVE_INFINITY, (1..Infinity).average())
         assertEquals(Double.NEGATIVE_INFINITY, (1 downTo -Infinity).average())
         assertEquals(Double.NaN, (1..0.0).average())
@@ -180,7 +181,7 @@ class BigIntegerProgressionTests {
     }
 
     @Test
-    fun `Sum of the progression`() {
+    fun `sum of the progression`() {
         assertEquals(Double.POSITIVE_INFINITY, (1..Infinity).sum())
         assertEquals(Double.NEGATIVE_INFINITY, (1 downTo -Infinity).sum())
         assertEquals(BigInteger.ZERO, (1..0.0).sum())
@@ -189,7 +190,7 @@ class BigIntegerProgressionTests {
     }
 
     @Test
-    fun `Hash codes`() {
+    fun `hash codes`() {
         assertEquals(progression(1, 2, 3).hashCode(), progression(1, 2, 3).hashCode())
         assertNotEquals(progression(1, 2, 3).hashCode(), progression(1, 2, -3).hashCode())
         assertNotEquals(progression(1, 2, 3).hashCode(), progression(1, -2, 3).hashCode())
@@ -208,7 +209,7 @@ class BigIntegerProgressionTests {
     }
 
     @Test
-    fun `String representation`() {
+    fun `string representation`() {
         assertTrue(1..0.0 is EmptyRange)
         assertEquals("[]", (1..0.0).toString())
         assertEquals("[1..3]", (1..3.0).toString())
@@ -227,7 +228,7 @@ class BigIntegerProgressionTests {
     }
 
     @Test
-    fun `Operator in`() {
+    fun `operator in`() {
         assertFalse(0 in EmptyRange)
 
         val posRange = progression(2, 10, 4)
@@ -271,12 +272,12 @@ class BigIntegerProgressionTests {
         assertTrue(0..30.0 step 6 in 0..30.0 step 6)
         assertTrue(0..30.0 step 5 in 0..30.0 step 5)
 
-        for (start1 in -7..7)
-            for (finish1 in -7..7)
-                for (step1 in 1..7)
-                    for (start2 in -7..7)
-                        for (finish2 in -7..7)
-                            for (step2 in 1..7) {
+        for (start1 in -5..5)
+            for (finish1 in -5..5)
+                for (step1 in 1..5)
+                    for (start2 in -5..5)
+                        for (finish2 in -5..5)
+                            for (step2 in 1..5) {
                                 assertEquals(
                                     (start1..finish1 step step1).all { it in start2..finish2 step step2 },
                                     start1..finish1 step step1 in start2..finish2.toBigInteger() step step2
@@ -295,10 +296,10 @@ class BigIntegerProgressionTests {
                                 )
                             }
 
-        for (start1 in -7..7)
-            for (step1 in 1..7)
-                for (start2 in -7..7)
-                    for (step2 in 1..7) {
+        for (start1 in -5..5)
+            for (step1 in 1..5)
+                for (start2 in -5..5)
+                    for (step2 in 1..5) {
                         assertEquals(
                             (start1..Infinity step step1).take(100).all { it in start2..Infinity step step2 },
                             start1..Infinity step step1 in start2..Infinity step step2
@@ -359,7 +360,7 @@ class BigIntegerProgressionTests {
     }
 
     @Test
-    fun `(Last)IndexOf`() {
+    fun `(last)IndexOf`() {
         val myRange = 0..100.0 step 5
         val range = 0..100 step 5
         for (i in -20..200) {
@@ -460,11 +461,11 @@ class BigIntegerProgressionTests {
 
     @Test
     fun extend() {
-        val single = 5..5.0
+        val single = 5..5.0 step 100
         assertEquals(single, single step 2)
         assertEquals(single, 5 downTo 5)
 
-        assertSame(single, single.extend(10))
+        assertNotEquals(15..15.0, single.extend(10))
 
         val infPosRange = 1..Infinity step 2
         val infNegRange = 5 downTo -Infinity step 2
@@ -486,6 +487,18 @@ class BigIntegerProgressionTests {
     }
 
     @Test
+    fun `shl, shr`() {
+        assertSame(EmptyRange, EmptyRange shl 10)
+        assertSame(EmptyRange, EmptyRange shr 10)
+        assertEquals(range(5, 5), range(0, 0) shr 5)
+        assertEquals(range(0, 0), range(5, 5) shl 5)
+        assertEquals(2 downTo -Infinity step 5, 7 downTo -Infinity step 5 shr 1)
+        assertEquals(2 downTo -Infinity step 5, -3 downTo -Infinity step 5 shl 1)
+        assertEquals(2 downTo -8 step 5, 7 downTo -3 step 5 shr 1)
+        assertEquals(2 downTo -8 step 5, -3 downTo -13 step 5 shl 1)
+    }
+
+    @Test
     fun `Forbidden toCollection's`() {
         for (voidMethodCall in listOf<(BigIntegerProgression) -> Unit>(
             { it.toCollection(mutableListOf()) },
@@ -503,7 +516,43 @@ class BigIntegerProgressionTests {
 
     @Test
     fun components() {
-        val(a1, a2, a3, a4, a5)=1..Infinity
+        val (a1, a2, a3, a4, a5) = 1..Infinity
         assertIterableEquals((1..5).map { it.toBigInteger() }, listOf(a1, a2, a3, a4, a5))
+    }
+
+    @Suppress("USELESS_IS_CHECK") //should highlight all when no suppress
+    @Test
+    fun `empty range`() {
+        assertTrue(EmptyRange intersect 1..1 is EmptyRange)
+        assertTrue(EmptyRange intersect ((1..1) as IntProgression) is EmptyRange)
+        assertTrue(EmptyRange intersect 1L..1L is EmptyRange)
+        assertTrue(EmptyRange intersect ((1L..1L) as LongProgression) is EmptyRange)
+        assertTrue(EmptyRange intersect range(1, 1) is EmptyRange)
+        assertTrue(EmptyRange intersect (range(1, 1) as BigIntegerProgression) is EmptyRange)
+        assertTrue(range(1, 1) intersect EmptyRange is EmptyRange)
+        assertTrue(EmptyRange.extend(1) is EmptyRange)
+        assertTrue(EmptyRange.shl(1) is EmptyRange)
+        assertTrue(EmptyRange.shr(1) is EmptyRange)
+        assertTrue(EmptyRange.drop(1) is EmptyRange)
+        assertTrue(EmptyRange.step(1) is EmptyRange)
+        assertTrue(EmptyRange.take(1) is EmptyRange)
+
+        assertEquals("[]", EmptyRange.toString())
+    }
+
+    @Suppress("USELESS_IS_CHECK")
+    @Test
+    fun `single range`() {
+        assertEquals(SingleRange(5.toBigInteger()), SingleRange(5))
+
+        assertEquals("[5]", SingleRange(5).toString())
+
+        assertTrue(SingleRange(5) shl 5 is SingleRange)
+        assertEquals(SingleRange(0), SingleRange(5) shl 5)
+        assertTrue(SingleRange(5) shr 5 is SingleRange)
+        assertEquals(SingleRange(10), SingleRange(5) shr 5)
+        assertTrue(SingleRange(5) step 5 is SingleRange)
+        assertEquals(SingleRange(5), SingleRange(5) step 5)
+
     }
 }

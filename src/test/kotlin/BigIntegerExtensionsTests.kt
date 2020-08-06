@@ -59,7 +59,7 @@ class BigIntegerExtensionsTests {
     }
 
     @Test
-    fun `Operators and infix generating functions`() {
+    fun `operators and infix generating functions`() {
         assertEquals(range(1, null), 1..Infinity)
         assertEquals(range(1, null), 1..+Infinity)
         assertEquals(range(1, null), 1..-NegativeInfinity)

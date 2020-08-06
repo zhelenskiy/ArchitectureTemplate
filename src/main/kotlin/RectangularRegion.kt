@@ -7,6 +7,7 @@ fun region(row: Number, column: Number) = Cell(row, column)
 fun region(rows: BigIntegerRange, column: Number): RectangularRegion = when (rows) {
     allIndexes -> Column(column)
     is EmptyRange -> EmptyRegion
+    is SingleRange -> Cell(rows.only, column)
     else -> ColumnPiece(rows, column)
 }
 
@@ -15,6 +16,7 @@ fun region(rows: LongRange, column: Number): RectangularRegion = region(range(ro
 fun region(row: Number, columns: BigIntegerRange) = when (columns) {
     allIndexes -> Row(row)
     is EmptyRange -> EmptyRegion
+    is SingleRange -> Cell(row, columns.only)
     else -> RowPiece(row, columns)
 }
 
@@ -22,11 +24,8 @@ fun region(row: Number, columns: IntRange): RectangularRegion = region(row, rang
 fun region(row: Number, columns: LongRange): RectangularRegion = region(row, range(columns))
 fun region(rows: BigIntegerRange, columns: BigIntegerRange): RectangularRegion = when {
     rows.isEmpty() || columns.isEmpty() -> EmptyRegion
-    rows.isSingle() && columns.isSingle() -> Cell(rows.first, columns.first)
-    rows.isSingle() && columns == allIndexes -> Row(rows.first)
-    rows.isSingle() -> RowPiece(rows.first, columns)
-    rows == allIndexes && columns.isSingle() -> Column(columns.first)
-    columns.isSingle() -> ColumnPiece(rows, columns.first)
+    rows.isSingle() -> region(rows.first, columns)
+    columns.isSingle() -> region(rows, columns.first)
     rows == allIndexes && columns == allIndexes -> SheetRegion
     else -> RectangularRegion(rows, columns)
 }
@@ -61,21 +60,26 @@ data class Cell(val row: BigInteger, val column: BigInteger) : RectangularRegion
     val columnInstance: Column
         get() = Column(column)
 
-    constructor(rowInstance: Row, columnInstance: Column) : this(rowInstance.index, columnInstance.index)
-    constructor(rowInstance: Row, column: Number) : this(rowInstance.index, column)
-    constructor(row: Number, columnInstance: Column) : this(row, columnInstance.index)
+    constructor(rowInstance: Row, columnInstance: Column) : this(rowInstance.number, columnInstance.number)
+    constructor(rowInstance: Row, column: Number) : this(rowInstance.number, column)
+    constructor(row: Number, columnInstance: Column) : this(row, columnInstance.number)
     constructor(row: Number, column: Number) : this(row.toBigInteger(), column.toBigInteger())
 
     operator fun rangeTo(other: Cell): RectangularRegion = region(this.row..other.row, this.column..other.column)
-    operator fun rangeTo(infinity: Infinity): RectangularRegion = region(row..Infinity, column..Infinity)
+    operator fun rangeTo(@Suppress("UNUSED_PARAMETER") infinity: Infinity): RectangularRegion = region(row..Infinity, column..Infinity)
 
     infix fun until(other: Cell): RectangularRegion = region(this.row until other.row, this.column until other.column)
-    infix fun until(infinity: Infinity): RectangularRegion = this..Infinity
+    infix fun until(@Suppress("UNUSED_PARAMETER") infinity: Infinity): RectangularRegion = this..Infinity
 
     infix fun downTo(other: Cell): RectangularRegion = other..this
 }
 
 open class RectangularRegion internal constructor(val rows: BigIntegerRange, val columns: BigIntegerRange) {
+    init {
+        if (rows !in allIndexes || columns !in allIndexes) {
+            throw IllegalArgumentException("Indexes must be within $allIndexes")
+        }
+    }
 
     fun isInfinite(): Boolean = rows.isInfinite() || columns.isInfinite()
 
@@ -83,7 +87,7 @@ open class RectangularRegion internal constructor(val rows: BigIntegerRange, val
 
     fun isEmpty(): Boolean = rows.isEmpty() || columns.isEmpty()
 
-    fun isNonEmpty(): Boolean = !isEmpty()
+    fun isNotEmpty(): Boolean = !isEmpty()
 
     fun count(): BigInteger? = when {
         isEmpty() -> BigInteger.ZERO
@@ -99,9 +103,9 @@ open class RectangularRegion internal constructor(val rows: BigIntegerRange, val
 
     override fun hashCode(): Int = if (isEmpty()) 0 else 31 * rows.hashCode() * columns.hashCode()
 
-    operator fun get(row: Number, column: Number): Cell? = region(row, column).takeIf { it in this }
+    operator fun get(row: Number, column: Number): Cell? = region(row + top, column + left).takeIf { it in this }
     operator fun get(rows: BigIntegerRange, column: Number): RectangularRegion? =
-        region(rows, column).takeIf { it in this }
+        region(rows shr top, column + left).takeIf { it in this }
 
     operator fun get(rows: IntRange, column: Number): RectangularRegion? =
         get(range(rows), column)
@@ -110,7 +114,7 @@ open class RectangularRegion internal constructor(val rows: BigIntegerRange, val
         get(range(rows), column)
 
     operator fun get(row: Number, columns: BigIntegerRange): RectangularRegion? =
-        region(row, columns).takeIf { it in this }
+        region(row + top, columns shr left).takeIf { it in this }
 
     operator fun get(row: Number, columns: IntRange): RectangularRegion? =
         get(row, range(columns))
@@ -119,7 +123,7 @@ open class RectangularRegion internal constructor(val rows: BigIntegerRange, val
         get(row, range(columns))
 
     operator fun get(rows: BigIntegerRange, columns: BigIntegerRange): RectangularRegion? =
-        region(rows, columns).takeIf { it in this }
+        region(rows shr top, columns shr left).takeIf { it in this }
 
     operator fun get(rows: IntRange, columns: BigIntegerRange): RectangularRegion? =
         get(range(rows), columns)
@@ -151,16 +155,16 @@ open class RectangularRegion internal constructor(val rows: BigIntegerRange, val
     infix fun intersect(other: RectangularRegion) =
         region(this.rows intersect other.rows, this.columns intersect other.columns)
 
-    val top: BigInteger
+    open val top: BigInteger
         get() = rows.first
 
-    val bottom: BigInteger?
+    open val bottom: BigInteger?
         get() = rows.last
 
-    val left: BigInteger
+    open val left: BigInteger
         get() = columns.first
 
-    val right: BigInteger?
+    open val right: BigInteger?
         get() = columns.last
 
     override fun toString(): String = when {
@@ -177,22 +181,24 @@ open class RowPiece internal constructor(val row: BigInteger, columns: BigIntege
     constructor(index: Number, columns: IntRange) : this(index.toBigInteger(), range(columns))
     constructor(index: Number, columns: LongRange) : this(index.toBigInteger(), range(columns))
 
-    operator fun rangeTo(infinity: Infinity): RectangularRegion = region(this.row..Infinity, columns)
+    operator fun rangeTo(@Suppress("UNUSED_PARAMETER") infinity: Infinity): RectangularRegion = region(this.row..Infinity, columns)
 
-    infix fun until(infinity: Infinity): RectangularRegion = this..Infinity
+    infix fun until(@Suppress("UNUSED_PARAMETER") infinity: Infinity): RectangularRegion = this..Infinity
 
     infix fun intersect(columnPiece: ColumnPiece) =
         Cell(row, columnPiece.column).takeIf { it in this && it in columnPiece }
+
+    override fun toString() = "RowPiece(row=$row, columns=$columns)"
 }
 
-data class Row(val index: BigInteger) : RowPiece(index, allIndexes) {
+data class Row(val number: BigInteger) : RowPiece(number, allIndexes) {
     constructor(index: Number) : this(index.toBigInteger())
 
     infix fun intersect(column: Column) = Cell(this, column)
 
-    operator fun rangeTo(other: Row): RectangularRegion = region(this.index..other.index, allIndexes)
+    operator fun rangeTo(other: Row): RectangularRegion = region(this.number..other.number, allIndexes)
 
-    infix fun until(other: Row): RectangularRegion = region(this.index until other.index, allIndexes)
+    infix fun until(other: Row): RectangularRegion = region(this.number until other.number, allIndexes)
 
     infix fun downTo(other: Row): RectangularRegion = other..this
 }
@@ -203,32 +209,34 @@ open class ColumnPiece internal constructor(rows: BigIntegerRange, val column: B
     constructor(rows: IntRange, column: Number) : this(range(rows), column.toBigInteger())
     constructor(rows: LongRange, column: Number) : this(range(rows), column.toBigInteger())
 
-    operator fun rangeTo(infinity: Infinity): RectangularRegion = region(rows, this.column..Infinity)
+    operator fun rangeTo(@Suppress("UNUSED_PARAMETER") infinity: Infinity): RectangularRegion = region(rows, this.column..Infinity)
 
-    infix fun until(infinity: Infinity): RectangularRegion = this..Infinity
+    infix fun until(@Suppress("UNUSED_PARAMETER") infinity: Infinity): RectangularRegion = this..Infinity
 
     infix fun intersect(rowPiece: RowPiece) = Cell(rowPiece.row, column).takeIf { it in rowPiece && it in this }
+
+    override fun toString() = "ColumnPiece(rows=$rows, column=$column)"
 }
 
-data class Column(val index: BigInteger) : ColumnPiece(allIndexes, index) {
+data class Column(val number: BigInteger) : ColumnPiece(allIndexes, number) {
     constructor(index: Number) : this(index.toBigInteger())
 
     infix fun intersect(row: Row) = Cell(row, this)
 
-    operator fun rangeTo(other: Column): RectangularRegion = region(allIndexes, this.index..other.index)
+    operator fun rangeTo(other: Column): RectangularRegion = region(allIndexes, this.number..other.number)
 
-    infix fun until(other: Column): RectangularRegion = region(allIndexes, this.index until other.index)
+    infix fun until(other: Column): RectangularRegion = region(allIndexes, this.number until other.number)
 
     infix fun downTo(other: Column): RectangularRegion = other..this
 }
 
 object EmptyRegion : RectangularRegion(EmptyRange, EmptyRange) {
-    override fun toString(): String {
-        return "EmptyRegion"
-    }
+    override fun toString() = "∅"
 }
 
-object SheetRegion : RectangularRegion(allIndexes, allIndexes)
+object SheetRegion : RectangularRegion(allIndexes, allIndexes) {
+    override fun toString() = "SheetRegion"
+}
 
 //todo explicit types,
 // * documentation,
@@ -240,6 +248,6 @@ object SheetRegion : RectangularRegion(allIndexes, allIndexes)
 // + range.contains(subrange)
 // + isSingle()
 // + changeBehaviour when single
-// * names, codes and parents for the outer container
+// + names, codes and parents for the outer container
 // + sheet
 // + components for ranges

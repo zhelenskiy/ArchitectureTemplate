@@ -90,4 +90,21 @@ class BigIntegerRangeTests {
         assertTrue(range(1, null).compareTo(range(1, null)) == 0)
         assertTrue(range(1, 100).compareTo(range(1, 100)) == 0)
     }
+
+    @Suppress("USELESS_IS_CHECK")
+    @Test
+    fun overrides() {
+        assertTrue(range(1..5).extend(5) is BigIntegerRange)
+        assertEquals(range(1..10), range(1..5).extend(5))
+        assertTrue(range(1..5) shl 5 is BigIntegerRange)
+        assertEquals(range(-4..0), range(1..5) shl 5)
+        assertTrue(range(1..5) shr 5 is BigIntegerRange)
+        assertEquals(range(6..10), range(1..5) shr 5)
+        assertTrue(range(1..5).drop(5) is BigIntegerRange)
+        assertTrue(range(1..5).drop(5) is EmptyRange)
+        assertTrue(range(1..5).take(5) is BigIntegerRange)
+        assertEquals(range(1..5), range(1..5).take(5))
+
+        assertEquals("[2..3]", (2..3.0).toString())
+    }
 }

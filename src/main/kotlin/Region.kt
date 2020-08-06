@@ -4,7 +4,7 @@ import java.util.function.Function
 class Region(vararg rectangularRegions: RectangularRegion) {
     //todo optimize
     val regions = rectangularRegions
-        .filter { it.isNonEmpty() }
+        .filter { it.isNotEmpty() }
         .toMutableSet()
         .apply {
             for (item in this)

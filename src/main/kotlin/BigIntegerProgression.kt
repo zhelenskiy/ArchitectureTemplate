@@ -6,7 +6,7 @@ import kotlin.Comparator
 import kotlin.NoSuchElementException
 import kotlin.math.sign
 
-fun progression(first: BigInteger, toInclusive: BigInteger?, step: BigInteger = BigInteger.ONE):  BigIntegerProgression {
+fun progression(first: BigInteger, toInclusive: BigInteger?, step: BigInteger = BigInteger.ONE): BigIntegerProgression {
     val simple = BigIntegerProgression(first, toInclusive, step)
     return when {
         simple.isEmpty() -> EmptyRange
@@ -41,11 +41,16 @@ fun progression(fromInclusive: Number, toInclusive: Number?, step: Number): BigI
     step.toBigInteger()
 )
 
-open class BigIntegerProgression internal constructor(val first: BigInteger, toInclusive: BigInteger?, val step: BigInteger) :
+open class BigIntegerProgression internal constructor(
+    val first: BigInteger,
+    toInclusive: BigInteger?,
+    val step: BigInteger
+) :
     Serializable, Sequence<BigInteger> {
     init {
         if (step == BigInteger.ZERO) throw IllegalArgumentException("Step must be non-zero.")
     }
+
     val last: BigInteger? = when {
         toInclusive == null -> null
         step > 0 && toInclusive < first -> first - step
@@ -179,7 +184,7 @@ open class BigIntegerProgression internal constructor(val first: BigInteger, toI
         else -> progression(first + step * n, last, step)
     }
 
-    fun drop(n: Number): BigIntegerProgression = drop(n.toBigInteger())
+    open fun drop(n: Number): BigIntegerProgression = drop(n.toBigInteger())
 
     fun elementAtOrNull(index: Number): BigInteger? {
         val dropped = drop(index)
@@ -238,14 +243,17 @@ open class BigIntegerProgression internal constructor(val first: BigInteger, toI
 
     fun flip(): BigIntegerProgression? = if (last == null) progression(first, null, -step) else null
 
-    fun extend(n: Number): BigIntegerProgression = extend(n.toBigInteger())
-    fun extend(n: BigInteger): BigIntegerProgression = when {
+    open fun extend(n: Number): BigIntegerProgression = extend(n.toBigInteger())
+    open fun extend(n: BigInteger): BigIntegerProgression = when {
         n < 0 -> throw IllegalArgumentException("Can not extend by less than 0 elements")
-        isEmpty() || isInfinite() || isSingle() -> this
+        isEmpty() || isInfinite() -> this
         else -> progression(first, last!! + step * n, step)
     }
 
-    infix fun step(step: Number): BigIntegerProgression {
+    open infix fun shr(number: Number) = progression(first + step * number, last?.let { it + step * number }, step)
+    open infix fun shl(number: Number) = shr(number.toBigInteger().negate())
+
+    open infix fun step(step: Number): BigIntegerProgression {
         val otherStep = step.toBigInteger()
         checkStepIsPositive(otherStep)
         return progression(first, last, if (this.step > 0) otherStep else -otherStep)
@@ -256,7 +264,7 @@ open class BigIntegerProgression internal constructor(val first: BigInteger, toI
     }
     //TODO implement infix fun subtract, for Ints, Longs
 
-    fun take(n: Int): BigIntegerProgression = when {
+    open fun take(n: Int): BigIntegerProgression = when {
         n < 0 -> throw IllegalArgumentException("Can not take less than 0 elements")
         isFinite() && count()!! <= n -> this
         else -> progression(first, first + (n - 1) * step, step)
@@ -286,15 +294,29 @@ open class BigIntegerProgression internal constructor(val first: BigInteger, toI
 
 class InfiniteRangeException : UnsupportedOperationException("The function evaluation is infinite")
 
+@Suppress("UNUSED_PARAMETER")
 object EmptyRange : BigIntegerRange(BigInteger.ONE, BigInteger.ZERO) {
-    infix fun intersect (progression: BigIntegerProgression) = EmptyRange
-    infix fun intersect (progression: IntProgression) = EmptyRange
-    infix fun intersect (progression: LongProgression) = EmptyRange
-    infix fun IntProgression.intersect (progression: EmptyRange) = EmptyRange
-    infix fun LongProgression.intersect (progression: EmptyRange) = EmptyRange
+    infix fun intersect(other: BigIntegerProgression) = EmptyRange
+    override infix fun intersect(other: BigIntegerRange) = EmptyRange
+    infix fun intersect(other: IntProgression) = EmptyRange
+    override infix fun intersect(other: IntRange) = EmptyRange
+    infix fun intersect(other: LongProgression) = EmptyRange
+    override infix fun intersect(other: LongRange) = EmptyRange
+
+    override fun extend(n: Number) = super.extend(n) as EmptyRange
+    override fun shl(number: Number) = super.shl(number) as EmptyRange
+    override fun shr(number: Number) = super.shr(number) as EmptyRange
+    override fun drop(n: Number) = super.drop(n) as EmptyRange
+    override fun step(step: Number) = super.step(step) as EmptyRange
+    override fun take(n: Int) = super.take(n) as EmptyRange
 }
 
-data class SingleRange internal constructor(val only: BigInteger): BigIntegerRange(only, only) {
+data class SingleRange(val only: BigInteger) : BigIntegerRange(only, only) {
+    constructor(only: Number) : this(only.toBigInteger())
     override fun toString(): String = super.toString()
+
+    override fun shl(number: Number) = super.shl(number) as SingleRange
+    override fun shr(number: Number) = super.shr(number) as SingleRange
+    override fun step(step: Number) = super.step(step) as SingleRange
 }
 
