@@ -237,17 +237,3 @@ object EmptyRegion : RectangularRegion(EmptyRange, EmptyRange) {
 object SheetRegion : RectangularRegion(allIndexes, allIndexes) {
     override fun toString() = "SheetRegion"
 }
-
-//todo explicit types,
-// * documentation,
-// + add non-existing methods to std-ranges,
-// + commented stuff,
-// + row and column as cell,
-// + add cell properties definitions as declared,
-// * add tests for the new features,
-// + range.contains(subrange)
-// + isSingle()
-// + changeBehaviour when single
-// + names, codes and parents for the outer container
-// + sheet
-// + components for ranges

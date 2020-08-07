@@ -119,7 +119,7 @@ class BigIntegerProgressionTests {
     @Test
     fun equality() {
         assertSame(EmptyRange, EmptyRange)
-        assertEquals(EmptyRange, 1..-100.toBigInteger())
+        assertEquals(EmptyRange, 1..(-100).toBigInteger())
         assertNotEquals(EmptyRange, 1..1000.toBigInteger())
         assertNotEquals(1..100.toBigInteger(), 1..1000.toBigInteger())
         assertEquals(1..1000.toBigInteger(), 1..1000.toBigInteger())
@@ -166,6 +166,7 @@ class BigIntegerProgressionTests {
     fun `simple iterating`() {
         assertIterableEquals((1..3).map { it.toBigInteger() }, (1..3.toBigInteger()).asIterable())
         assertIterableEquals((1..3).map { it.toBigInteger() }, (1..Infinity).take(3).asIterable())
+        assertIterableEquals((1..3).map { it.toBigInteger() }, (1..Infinity).take(3.toBigInteger()).asIterable())
         assertIterableEquals(listOf<BigInteger>(), (1..0.toBigInteger()).asIterable())
         assertIterableEquals(listOf(3, 2, 1).map { it.toBigInteger() }, (3.toBigInteger() downTo 1.toBigInteger()).asIterable())
         assertIterableEquals(listOf(3, 2, 1).map { it.toBigInteger() }, (3 downTo -Infinity).take(3).asIterable())
@@ -347,6 +348,7 @@ class BigIntegerProgressionTests {
         for (method in listOf<BigIntegerProgression.(Int) -> BigInteger>(
             { this.elementAtOrElse(it) { BigInteger.ZERO } },
             { this.elementAtOrNull(it)!! },
+            { this.elementAtOrNull(it.toBigInteger())!! },
             { this.elementAt(it) })
         ) {
             val range = 1..Infinity step 10
@@ -491,7 +493,7 @@ class BigIntegerProgressionTests {
     }
 
     @Test
-    fun `shl, shr`() {
+    fun shifts() {
         assertSame(EmptyRange, EmptyRange shl 10)
         assertSame(EmptyRange, EmptyRange shr 10)
         assertEquals(range(5, 5), range(0, 0) shr 5)

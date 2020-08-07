@@ -246,7 +246,7 @@ class StandardRangesExtensionsTests {
 
     @Suppress("EmptyRange")
     @Test
-    fun `min, max`() {
+    fun `minimum, maximum`() {
         assertEquals(0, (0..Int.MAX_VALUE).min())
         assertEquals(Int.MAX_VALUE, (0..Int.MAX_VALUE).max())
         assertEquals(0L, (0L..Long.MAX_VALUE).min())
