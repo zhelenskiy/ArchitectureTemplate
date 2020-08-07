@@ -1,9 +1,10 @@
 import java.io.Serializable
 import java.math.BigDecimal
 import java.math.BigInteger
-import java.util.*
+import java.util.SortedSet
 import kotlin.Comparator
 import kotlin.NoSuchElementException
+import kotlin.collections.HashSet
 import kotlin.math.sign
 
 fun progression(first: BigInteger, toInclusive: BigInteger?, step: BigInteger = BigInteger.ONE): BigIntegerProgression {
@@ -186,15 +187,16 @@ open class BigIntegerProgression internal constructor(
 
     open fun drop(n: Number): BigIntegerProgression = drop(n.toBigInteger())
 
-    fun elementAtOrNull(index: Number): BigInteger? {
+    fun elementAtOrNull(index: Number): BigInteger? = elementAtOrNull(index.toBigInteger())
+    fun elementAtOrNull(index: BigInteger): BigInteger? = if (index < 0) null else {
         val dropped = drop(index)
-        return dropped.first.takeUnless { dropped.isEmpty() }
+        dropped.first.takeUnless { dropped.isEmpty() }
     }
 
     fun elementAtOrElse(index: Number, defaultValue: (Number) -> BigInteger): BigInteger =
         elementAtOrNull(index) ?: defaultValue(index)
 
-    fun elementAt(index: Number): BigInteger = elementAtOrElse(index) { throw NoSuchElementException() }
+    fun elementAt(index: Number): BigInteger = elementAtOrElse(index) { throw IndexOutOfBoundsException() }
 
     fun indexOf(element: BigInteger): BigInteger = if (element in this) (element - first) / step else -BigInteger.ONE
     fun indexOf(element: Number): BigInteger = indexOf(element.toBigInteger())
@@ -263,8 +265,8 @@ open class BigIntegerProgression internal constructor(
         if (step <= 0) throw IllegalArgumentException("Step must be positive, was: $step.")
     }
     //TODO implement infix fun subtract, for Ints, Longs
-
-    open fun take(n: Int): BigIntegerProgression = when {
+    open fun take(n: Number): BigIntegerProgression = take(n.toBigInteger())
+    fun take(n: BigInteger): BigIntegerProgression = when {
         n < 0 -> throw IllegalArgumentException("Can not take less than 0 elements")
         isFinite() && count()!! <= n -> this
         else -> progression(first, first + (n - 1) * step, step)
@@ -308,7 +310,7 @@ object EmptyRange : BigIntegerRange(BigInteger.ONE, BigInteger.ZERO) {
     override fun shr(number: Number) = super.shr(number) as EmptyRange
     override fun drop(n: Number) = super.drop(n) as EmptyRange
     override fun step(step: Number) = super.step(step) as EmptyRange
-    override fun take(n: Int) = super.take(n) as EmptyRange
+    override fun take(n: Number) = super.take(n) as EmptyRange
 }
 
 data class SingleRange(val only: BigInteger) : BigIntegerRange(only, only) {

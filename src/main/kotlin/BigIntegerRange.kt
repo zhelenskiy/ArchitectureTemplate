@@ -60,5 +60,5 @@ open class BigIntegerRange internal constructor(first: BigInteger, last: BigInte
     override fun shl(number: Number) = super.shl(number) as BigIntegerRange
     override fun shr(number: Number) = super.shr(number) as BigIntegerRange
     override fun drop(n: Number) = super.drop(n) as BigIntegerRange
-    override fun take(n: Int) = super.take(n) as BigIntegerRange
+    override fun take(n: Number) = super.take(n) as BigIntegerRange
 }

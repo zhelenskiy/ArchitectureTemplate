@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import java.lang.IndexOutOfBoundsException
 import java.math.BigDecimal
 import java.math.BigInteger
 import kotlin.IllegalArgumentException
@@ -342,21 +343,24 @@ class BigIntegerProgressionTests {
     }
 
     @Test
-    fun `elementAt(Or(Else|Null))`() {
+    fun `elementAt(Or(Else|Null)|)`() {
         for (method in listOf<BigIntegerProgression.(Int) -> BigInteger>(
             { this.elementAtOrElse(it) { BigInteger.ZERO } },
             { this.elementAtOrNull(it)!! },
             { this.elementAt(it) })
         ) {
             val range = 1..Infinity step 10
-            assertThrows(IllegalArgumentException::class.java) { range.method(-10) }
             for (i in 0..100)
                 assertEquals((1 + 10 * i).toBigInteger(), range.method(i))
         }
+        assertThrows(IndexOutOfBoundsException::class.java) { (1..Infinity).elementAt(-10) }
+        assertNull((1..Infinity).elementAtOrNull(-10))
+        assertEquals(BigInteger.TEN, (1..Infinity).elementAtOrElse(-10) {BigInteger.TEN})
+
         val els = BigInteger.valueOf(12)
         assertSame(els, EmptyRange.elementAtOrElse(0) { els })
         assertNull(EmptyRange.elementAtOrNull(0))
-        assertThrows(NoSuchElementException::class.java) { EmptyRange.elementAt(0) }
+        assertThrows(IndexOutOfBoundsException::class.java) { EmptyRange.elementAt(0) }
     }
 
     @Test
