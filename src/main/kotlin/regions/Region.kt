@@ -1,3 +1,5 @@
+package regions
+
 class Region(vararg rectangularRegions: RectangularRegion) {
     //todo optimize
     val rectangles = rectangularRegions

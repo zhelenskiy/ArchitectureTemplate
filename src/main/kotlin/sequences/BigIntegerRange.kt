@@ -1,3 +1,9 @@
+package sequences
+
+import extensions.Infinity
+import extensions.rangeTo
+import extensions.toBigInteger
+import extensions.until
 import java.math.BigInteger
 
 fun range(first: Number, last: Number?): BigIntegerRange = range(first.toBigInteger(), last?.toBigInteger())

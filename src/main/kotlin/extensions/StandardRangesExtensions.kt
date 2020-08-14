@@ -1,3 +1,8 @@
+package extensions
+
+import sequences.BigIntegerProgression
+import sequences.BigIntegerRange
+import sequences.progression
 import java.math.BigDecimal
 import java.math.BigInteger
 

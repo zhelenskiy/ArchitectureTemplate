@@ -1,5 +1,7 @@
+import extensions.*
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import sequences.*
 import java.lang.IndexOutOfBoundsException
 import java.math.BigDecimal
 import java.math.BigInteger
@@ -168,7 +170,10 @@ class BigIntegerProgressionTests {
         assertIterableEquals((1..3).map { it.toBigInteger() }, (1..Infinity).take(3).asIterable())
         assertIterableEquals((1..3).map { it.toBigInteger() }, (1..Infinity).take(3.toBigInteger()).asIterable())
         assertIterableEquals(listOf<BigInteger>(), (1..0.toBigInteger()).asIterable())
-        assertIterableEquals(listOf(3, 2, 1).map { it.toBigInteger() }, (3.toBigInteger() downTo 1.toBigInteger()).asIterable())
+        assertIterableEquals(
+            listOf(3, 2, 1).map { it.toBigInteger() },
+            (3.toBigInteger() downTo 1.toBigInteger()).asIterable()
+        )
         assertIterableEquals(listOf(3, 2, 1).map { it.toBigInteger() }, (3 downTo -Infinity).take(3).asIterable())
         assertIterableEquals(listOf<BigInteger>(), (-1 downTo 0.toBigInteger()).asIterable())
     }
@@ -207,7 +212,10 @@ class BigIntegerProgressionTests {
         assertEquals(0, progression(-2, 4, -30).hashCode())
 
         assertEquals((1..100.toBigInteger() step 1000).hashCode(), (1..1000.toBigInteger() step 100000).hashCode())
-        assertEquals((1..100.toBigInteger() step 1000).hashCode(), (1 downTo (-1000).toBigInteger() step 100000).hashCode())
+        assertEquals(
+            (1..100.toBigInteger() step 1000).hashCode(),
+            (1 downTo (-1000).toBigInteger() step 100000).hashCode()
+        )
     }
 
     @Test
@@ -357,7 +365,7 @@ class BigIntegerProgressionTests {
         }
         assertThrows(IndexOutOfBoundsException::class.java) { (1..Infinity).elementAt(-10) }
         assertNull((1..Infinity).elementAtOrNull(-10))
-        assertEquals(BigInteger.TEN, (1..Infinity).elementAtOrElse(-10) {BigInteger.TEN})
+        assertEquals(BigInteger.TEN, (1..Infinity).elementAtOrElse(-10) { BigInteger.TEN })
 
         val els = BigInteger.valueOf(12)
         assertSame(els, EmptyRange.elementAtOrElse(0) { els })

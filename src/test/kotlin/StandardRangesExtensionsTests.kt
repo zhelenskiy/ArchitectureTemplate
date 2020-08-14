@@ -1,5 +1,9 @@
+import extensions.*
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import sequences.EmptyRange
+import sequences.progression
+import sequences.range
 import java.math.BigDecimal
 import java.math.BigInteger
 

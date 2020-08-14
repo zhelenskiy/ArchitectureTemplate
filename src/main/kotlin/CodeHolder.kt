@@ -1,3 +1,5 @@
+import regions.Region
+
 open class CodeHolder(val region: Region, open val code: Any /*Now*/, val name: String) {
     val subsriptors: List<CodeHolder> = emptyList() //stuff that uses this holder. They should be notified when data changes
     fun evaluate(): Any /*Now*/ = Unit

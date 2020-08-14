@@ -1,5 +1,11 @@
+import extensions.Infinity
+import extensions.rangeTo
+import extensions.toBigInteger
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import regions.*
+import sequences.EmptyRange
+import sequences.range
 import java.math.BigInteger
 
 class RectangularRegionTests {

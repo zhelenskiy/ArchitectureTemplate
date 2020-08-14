@@ -1,5 +1,13 @@
+import extensions.Infinity
+import extensions.compareTo
+import extensions.rangeTo
+import extensions.toBigInteger
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import sequences.BigIntegerRange
+import sequences.EmptyRange
+import sequences.SingleRange
+import sequences.range
 import java.math.BigInteger
 
 class BigIntegerRangeTests {

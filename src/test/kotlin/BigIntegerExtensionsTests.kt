@@ -1,5 +1,8 @@
+import extensions.*
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import sequences.progression
+import sequences.range
 import java.math.BigInteger
 
 class BigIntegerExtensionsTests {

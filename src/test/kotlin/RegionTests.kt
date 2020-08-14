@@ -1,5 +1,8 @@
+import extensions.Infinity
+import extensions.rangeTo
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import regions.*
 
 class RegionTests {
     @Test

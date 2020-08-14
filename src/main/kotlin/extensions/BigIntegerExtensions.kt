@@ -1,3 +1,7 @@
+package extensions
+
+import sequences.progression
+import sequences.range
 import java.math.BigInteger
 
 fun Number.toBigInteger(): BigInteger = if (this is BigInteger) this else BigInteger.valueOf(this.toLong())
@@ -106,4 +110,5 @@ infix fun Number.until(@Suppress("UNUSED_PARAMETER") infinity: Infinity) = range
 
 operator fun Number.rangeTo(@Suppress("UNUSED_PARAMETER") infinity: Infinity) = range(this.toBigInteger(), null)
 
-infix fun Number.downTo(@Suppress("UNUSED_PARAMETER") infinity: NegativeInfinity) = progression(this, null, -BigInteger.ONE)
+infix fun Number.downTo(@Suppress("UNUSED_PARAMETER") infinity: NegativeInfinity) =
+    progression(this, null, -BigInteger.ONE)
