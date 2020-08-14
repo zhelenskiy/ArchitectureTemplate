@@ -8,10 +8,13 @@ import java.math.BigInteger
 
 @Suppress("unused")
 fun IntProgression.isInfinite() = false
+
 @Suppress("unused")
 fun LongProgression.isInfinite() = false
+
 @Suppress("unused")
 fun IntProgression.isFinite() = true
+
 @Suppress("unused")
 fun LongProgression.isFinite() = true
 fun IntProgression.isNotEmpty() = !this.isEmpty()
@@ -26,6 +29,7 @@ fun IntProgression.average(): BigDecimal? =
 
 fun LongProgression.average(): BigDecimal? =
     if (this.isNotEmpty()) (first.toBigDecimal() + last.toBigDecimal()).divide(BigDecimal.valueOf(2L)) else null
+
 fun IntProgression.sum(): BigInteger = progression(this).sum() as BigInteger
 fun LongProgression.sum(): BigInteger = progression(this).sum() as BigInteger
 
@@ -65,12 +69,20 @@ operator fun LongProgression.contains(subProgression: BigIntegerProgression): Bo
 
 fun IntProgression.drop(n: Number): IntProgression {
     val big = progression(this).drop(n)
-    return if (big is BigIntegerRange) big.first.toInt()..big.last!!.toInt() else IntProgression.fromClosedRange(big.first.toInt(), big.last!!.toInt(), big.step.toInt())
+    return if (big is BigIntegerRange) big.first.toInt()..big.last!!.toInt() else IntProgression.fromClosedRange(
+        big.first.toInt(),
+        big.last!!.toInt(),
+        big.step.toInt()
+    )
 }
 
 fun LongProgression.drop(n: Number): LongProgression {
     val big = progression(this).drop(n)
-    return if (big is BigIntegerRange) big.first.toLong()..big.last!!.toLong() else LongProgression.fromClosedRange(big.first.toLong(), big.last!!.toLong(), big.step.toLong())
+    return if (big is BigIntegerRange) big.first.toLong()..big.last!!.toLong() else LongProgression.fromClosedRange(
+        big.first.toLong(),
+        big.last!!.toLong(),
+        big.step.toLong()
+    )
 }
 
 fun IntRange.drop(n: Number): IntRange {
@@ -82,14 +94,23 @@ fun LongRange.drop(n: Number): LongRange {
     val big = progression(this).drop(n)
     return big.first.toLong()..big.last!!.toLong()
 }
+
 fun IntProgression.take(n: Number): IntProgression {
     val big = progression(this).take(n)
-    return if (big is BigIntegerRange) big.first.toInt()..big.last!!.toInt() else IntProgression.fromClosedRange(big.first.toInt(), big.last!!.toInt(), big.step.toInt())
+    return if (big is BigIntegerRange) big.first.toInt()..big.last!!.toInt() else IntProgression.fromClosedRange(
+        big.first.toInt(),
+        big.last!!.toInt(),
+        big.step.toInt()
+    )
 }
 
 fun LongProgression.take(n: Number): LongProgression {
     val big = progression(this).take(n)
-    return if (big is BigIntegerRange) big.first.toLong()..big.last!!.toLong() else LongProgression.fromClosedRange(big.first.toLong(), big.last!!.toLong(), big.step.toLong())
+    return if (big is BigIntegerRange) big.first.toLong()..big.last!!.toLong() else LongProgression.fromClosedRange(
+        big.first.toLong(),
+        big.last!!.toLong(),
+        big.step.toLong()
+    )
 }
 
 fun IntRange.take(n: Number): IntRange {

@@ -267,6 +267,7 @@ open class BigIntegerProgression internal constructor(
     private fun checkStepIsPositive(step: BigInteger) {
         if (step <= 0) throw IllegalArgumentException("Step must be positive, was: $step.")
     }
+
     //TODO implement infix fun subtract, for Ints, Longs
     open fun take(n: Number): BigIntegerProgression = take(n.toBigInteger())
     fun take(n: BigInteger): BigIntegerProgression = when {
@@ -318,6 +319,7 @@ object EmptyRange : BigIntegerRange(BigInteger.ONE, BigInteger.ZERO) {
 
 data class SingleRange(val only: BigInteger) : BigIntegerRange(only, only) {
     constructor(only: Number) : this(only.toBigInteger())
+
     override fun toString(): String = super.toString()
 
     override fun shl(number: Number) = super.shl(number) as SingleRange

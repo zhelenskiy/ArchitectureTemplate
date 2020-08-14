@@ -73,7 +73,8 @@ data class Cell(val row: BigInteger, val column: BigInteger) : RectangularRegion
     constructor(row: Number, column: Number) : this(row.toBigInteger(), column.toBigInteger())
 
     operator fun rangeTo(other: Cell): RectangularRegion = region(this.row..other.row, this.column..other.column)
-    operator fun rangeTo(@Suppress("UNUSED_PARAMETER") infinity: Infinity): RectangularRegion = region(row..Infinity, column..Infinity)
+    operator fun rangeTo(@Suppress("UNUSED_PARAMETER") infinity: Infinity): RectangularRegion =
+        region(row..Infinity, column..Infinity)
 
     infix fun until(other: Cell): RectangularRegion = region(this.row until other.row, this.column until other.column)
     infix fun until(@Suppress("UNUSED_PARAMETER") infinity: Infinity): RectangularRegion = this..Infinity
@@ -188,7 +189,8 @@ open class RowPiece internal constructor(val row: BigInteger, columns: BigIntege
     constructor(index: Number, columns: IntRange) : this(index.toBigInteger(), range(columns))
     constructor(index: Number, columns: LongRange) : this(index.toBigInteger(), range(columns))
 
-    operator fun rangeTo(@Suppress("UNUSED_PARAMETER") infinity: Infinity): RectangularRegion = region(this.row..Infinity, columns)
+    operator fun rangeTo(@Suppress("UNUSED_PARAMETER") infinity: Infinity): RectangularRegion =
+        region(this.row..Infinity, columns)
 
     infix fun until(@Suppress("UNUSED_PARAMETER") infinity: Infinity): RectangularRegion = this..Infinity
 
@@ -216,7 +218,8 @@ open class ColumnPiece internal constructor(rows: BigIntegerRange, val column: B
     constructor(rows: IntRange, column: Number) : this(range(rows), column.toBigInteger())
     constructor(rows: LongRange, column: Number) : this(range(rows), column.toBigInteger())
 
-    operator fun rangeTo(@Suppress("UNUSED_PARAMETER") infinity: Infinity): RectangularRegion = region(rows, this.column..Infinity)
+    operator fun rangeTo(@Suppress("UNUSED_PARAMETER") infinity: Infinity): RectangularRegion =
+        region(rows, this.column..Infinity)
 
     infix fun until(@Suppress("UNUSED_PARAMETER") infinity: Infinity): RectangularRegion = this..Infinity
 
