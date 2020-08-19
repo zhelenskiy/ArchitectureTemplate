@@ -20,19 +20,19 @@ dependencies {
 }
 
 dokkaJavadoc {
-    outputDirectory = "docs/java-docs"
+    outputDirectory = "java-docs"
 }
 
 dokkaHtml {
-    outputDirectory = "docs/html-docs"
+    outputDirectory = "html-docs"
 }
 
 dokkaGfm {
-    outputDirectory = "docs/gfm-docs"
+    outputDirectory = "docs"
 }
 
 dokkaJekyll {
-    outputDirectory  = "docs/jekyll-docs"
+    outputDirectory  = "jekyll-docs"
 }
 
 test {
