@@ -1,0 +1,9 @@
+$dokka.format:html
+$dokka.linkExtension:html
+$dokka.location:/CodeHolder/evaluate/#/PointingToDeclaration/-architecture-template/[jvm root]/-code-holder/evaluate.html
+$dokka.location:/CodeHolder/reevaluate/#/PointingToDeclaration/-architecture-template/[jvm root]/-code-holder/reevaluate.html
+[jvm root]
+extensions
+regions
+sequences
+
