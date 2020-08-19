@@ -24,6 +24,8 @@ class BigIntegerRangeTests {
         assertEquals(range(1, 1), range(1..1))
         assertEquals(range(1, 1), range(1L..1L))
         assertEquals(BigInteger.ONE, range(1, 1).step)
+        assertEquals(range(1, null), range(1, Double.POSITIVE_INFINITY))
+        assertEquals(range(1, null), range(1, Float.POSITIVE_INFINITY))
     }
 
     @Test

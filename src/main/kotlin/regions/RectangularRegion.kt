@@ -104,7 +104,7 @@ open class RectangularRegion internal constructor(val rows: BigIntegerRange, val
     }
 
     override fun equals(other: Any?): Boolean = when {
-        other !is RectangularRegion -> false
+        other !is RectangularRegion -> super.equals(other)
         this.isEmpty() && other.isEmpty() -> true
         else -> this.rows == other.rows && this.columns == other.columns
     }

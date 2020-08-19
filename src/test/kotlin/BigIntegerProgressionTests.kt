@@ -524,7 +524,7 @@ class BigIntegerProgressionTests {
             { it.toSortedSet() },
             { it.toSortedSet(naturalOrder()) }
         )) {
-            assertThrows(InfiniteRangeException::class.java) { voidMethodCall(1..Infinity) }
+            assertThrows(InfiniteProgressionException::class.java) { voidMethodCall(1..Infinity) }
         }
     }
 

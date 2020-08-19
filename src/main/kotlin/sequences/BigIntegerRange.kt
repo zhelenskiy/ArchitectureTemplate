@@ -6,7 +6,12 @@ import extensions.toBigInteger
 import extensions.until
 import java.math.BigInteger
 
-fun range(first: Number, last: Number?): BigIntegerRange = range(first.toBigInteger(), last?.toBigInteger())
+fun range(first: Number, last: Number?): BigIntegerRange = range(
+    first.toBigInteger(),
+    last?.takeUnless { it is Double && it == Double.POSITIVE_INFINITY || it is Float && it == Float.POSITIVE_INFINITY }
+        ?.toBigInteger()
+)
+
 fun range(first: BigInteger, last: BigInteger?): BigIntegerRange = when {
     last != null && first > last -> EmptyRange
     first == last -> SingleRange(first)

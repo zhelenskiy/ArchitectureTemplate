@@ -5,7 +5,7 @@ import sequences.range
 import java.math.BigInteger
 
 /**
- * Converts a [Number] to [BigInteger] using [Long] representation as intermediate
+ * Converts a [Number] to [BigInteger] using [Long] representation as intermediate.
  *
  * @return Converted [BigInteger]
  * @receiver A [Number] to convert
@@ -14,7 +14,7 @@ fun Number.toBigInteger(): BigInteger = if (this is BigInteger) this else BigInt
 
 /**
  * Redefines `plus` operator for [BigInteger] and [BigInteger] instances.
- * The purpose of the redefinition is to resolve `[BigInteger] + [BigInteger]` when `[BigInteger] + [Number]` and `[Number] + [BigInteger]` are defined
+ * The purpose of the redefinition is to resolve `[BigInteger] + [BigInteger]` when `[BigInteger] + [Number]` and `[Number] + [BigInteger]` are defined.
  * @receiver The first term
  * @param number The second term
  * @see BigInteger.add
@@ -23,7 +23,7 @@ fun Number.toBigInteger(): BigInteger = if (this is BigInteger) this else BigInt
 operator fun BigInteger.plus(number: BigInteger): BigInteger = this.toBigInteger().add(number)
 
 /**
- * Sums [Number] and [BigInteger] as two [BigInteger] instances
+ * Sums [Number] and [BigInteger] as two [BigInteger] instances.
  * @receiver The first term
  * @param number The second term
  * @see BigInteger.add
@@ -35,7 +35,7 @@ operator fun Number.plus(number: BigInteger): BigInteger = when (this) {
 }
 
 /**
- * Sums [BigInteger] and [Number] as two [BigInteger] instances
+ * Sums [BigInteger] and [Number] as two [BigInteger] instances.
  * @receiver The first term
  * @param number The second term
  * @see BigInteger.add
@@ -48,7 +48,7 @@ operator fun BigInteger.plus(number: Number): BigInteger = when (number) {
 
 /**
  * Redefines `minus` operator for [BigInteger] and [BigInteger] instances.
- * The purpose of the redefinition is to resolve `[BigInteger] - [BigInteger]` when `[BigInteger] - [Number]` and `[Number] - [BigInteger]` are defined
+ * The purpose of the redefinition is to resolve `[BigInteger] - [BigInteger]` when `[BigInteger] - [Number]` and `[Number] - [BigInteger]` are defined.
  * @receiver The first term
  * @param number The second term
  * @see BigInteger.minus
@@ -57,7 +57,7 @@ operator fun BigInteger.plus(number: Number): BigInteger = when (number) {
 operator fun BigInteger.minus(number: BigInteger): BigInteger = this.toBigInteger().subtract(number)
 
 /**
- * Subtracts [Number] and [BigInteger] as two [BigInteger] instances
+ * Subtracts [Number] and [BigInteger] as two [BigInteger] instances.
  * @receiver The first term
  * @param number The second term
  * @see BigInteger.subtract
@@ -69,7 +69,7 @@ operator fun Number.minus(number: BigInteger): BigInteger = when (this) {
 }
 
 /**
- * Subtracts [BigInteger] and [Number] as two [BigInteger] instances
+ * Subtracts [BigInteger] and [Number] as two [BigInteger] instances.
  * @receiver The first term
  * @param number The second term
  * @see BigInteger.subtract
@@ -82,7 +82,7 @@ operator fun BigInteger.minus(number: Number): BigInteger = when (number) {
 
 /**
  * Redefines `times` operator for [BigInteger] and [BigInteger] instances.
- * The purpose of the redefinition is to resolve `[BigInteger] * [BigInteger]` when `[BigInteger] * [Number]` and `[Number] * [BigInteger]` are defined
+ * The purpose of the redefinition is to resolve `[BigInteger] * [BigInteger]` when `[BigInteger] * [Number]` and `[Number] * [BigInteger]` are defined.
  * @receiver The first term
  * @param number The second term
  * @see BigInteger.multiply
@@ -91,7 +91,7 @@ operator fun BigInteger.minus(number: Number): BigInteger = when (number) {
 operator fun BigInteger.times(number: BigInteger): BigInteger = this.toBigInteger().multiply(number)
 
 /**
- * Multiplies [Number] and [BigInteger] as two [BigInteger] instances
+ * Multiplies [Number] and [BigInteger] as two [BigInteger] instances.
  * @receiver The first term
  * @param number The second term
  * @see BigInteger.multiply
@@ -103,7 +103,7 @@ operator fun Number.times(number: BigInteger): BigInteger = when (this) {
 }
 
 /**
- * Multiplies [BigInteger] and [Number] as two [BigInteger] instances
+ * Multiplies [BigInteger] and [Number] as two [BigInteger] instances.
  * @receiver The first term
  * @param number The second term
  * @see BigInteger.multiply
@@ -116,7 +116,7 @@ operator fun BigInteger.times(number: Number): BigInteger = when (number) {
 
 /**
  * Redefines `div` operator for [BigInteger] and [BigInteger] instances.
- * The purpose of the redefinition is to resolve `[BigInteger] / [BigInteger]` when `[BigInteger] / [Number]` and `[Number] / [BigInteger]` are defined
+ * The purpose of the redefinition is to resolve `[BigInteger] / [BigInteger]` when `[BigInteger] / [Number]` and `[Number] / [BigInteger]` are defined.
  * @receiver The first term
  * @param number The second term
  * @see BigInteger.divide
@@ -125,7 +125,7 @@ operator fun BigInteger.times(number: Number): BigInteger = when (number) {
 operator fun BigInteger.div(number: BigInteger): BigInteger = this.toBigInteger().divide(number)
 
 /**
- * Divides [Number] and [BigInteger] as two [BigInteger] instances
+ * Divides [Number] and [BigInteger] as two [BigInteger] instances.
  * @receiver The first term
  * @param number The second term
  * @see BigInteger.divide
@@ -137,7 +137,7 @@ operator fun Number.div(number: BigInteger): BigInteger = when (this) {
 }
 
 /**
- * Divides [BigInteger] and [Number] as two [BigInteger] instances
+ * Divides [BigInteger] and [Number] as two [BigInteger] instances.
  * @receiver The first term
  * @param number The second term
  * @see BigInteger.divide
@@ -150,7 +150,7 @@ operator fun BigInteger.div(number: Number): BigInteger = when (number) {
 
 /**
  * Redefines `rem` operator for [BigInteger] and [BigInteger] instances.
- * The purpose of the redefinition is to resolve `[BigInteger] % [BigInteger]` when `[BigInteger] % [Number]` and `[Number] % [BigInteger]` are defined
+ * The purpose of the redefinition is to resolve `[BigInteger] % [BigInteger]` when `[BigInteger] % [Number]` and `[Number] % [BigInteger]` are defined.
  * @receiver The first term
  * @param number The second term
  * @see BigInteger.remainder
@@ -159,7 +159,7 @@ operator fun BigInteger.div(number: Number): BigInteger = when (number) {
 operator fun BigInteger.rem(number: BigInteger): BigInteger = this.toBigInteger().remainder(number)
 
 /**
- * Gets remainder of [Number] and [BigInteger] as of two [BigInteger] instances
+ * Gets remainder of [Number] and [BigInteger] as of two [BigInteger] instances.
  * @receiver The first term
  * @param number The second term
  * @see BigInteger.remainder
@@ -171,7 +171,7 @@ operator fun Number.rem(number: BigInteger): BigInteger = when (this) {
 }
 
 /**
- * Gets remainder of [BigInteger] and [Number] as of two [BigInteger] instances
+ * Gets remainder of [BigInteger] and [Number] as of two [BigInteger] instances.
  * @receiver The first term
  * @param number The second term
  * @see BigInteger.remainder
@@ -183,7 +183,7 @@ operator fun BigInteger.rem(number: Number): BigInteger = when (number) {
 }
 
 /**
- * Compares [Number] and [BigInteger] as two [BigInteger] instances
+ * Compares [Number] and [BigInteger] as two [BigInteger] instances.
  * @receiver The first term
  * @param number The second term
  * @see BigInteger.compareTo
@@ -196,7 +196,7 @@ operator fun Number.compareTo(number: BigInteger): Int = when (this) {
 
 
 /**
- * Compares [BigInteger] and [Number] as two [BigInteger] instances
+ * Compares [BigInteger] and [Number] as two [BigInteger] instances.
  * @receiver The first term
  * @param number The second term
  * @see BigInteger.compareTo
@@ -221,7 +221,7 @@ operator fun BigInteger.compareTo(number: Number): Int = when (number) {
 operator fun BigInteger.rangeTo(number: BigInteger) = range(this, number)
 
 /**
- * Defines `rangeTo` operator for [Number] and [BigInteger] as for two [BigInteger] instances
+ * Defines `rangeTo` operator for [Number] and [BigInteger] as for two [BigInteger] instances.
  * @receiver The first number
  * @param number The border number
  * @return Ascending [sequences.BigIntegerRange] from the [this] up to [number] (inclusive)
@@ -233,7 +233,7 @@ operator fun BigInteger.rangeTo(number: BigInteger) = range(this, number)
 operator fun Number.rangeTo(number: BigInteger) = range(this, number)
 
 /**
- * Defines `rangeTo` operator for [BigInteger] and [Number] as for two [BigInteger] instances
+ * Defines `rangeTo` operator for [BigInteger] and [Number] as for two [BigInteger] instances.
  * @receiver The first number
  * @param number The border number
  * @return Ascending [sequences.BigIntegerRange] from the [this] up to [number] (inclusive)
@@ -258,7 +258,7 @@ operator fun BigInteger.rangeTo(number: Number) = range(this, number)
 infix fun BigInteger.until(number: BigInteger) = range(this, number.toBigInteger().dec())
 
 /**
- * Defines `until` infix function for [Number] and [BigInteger] as for two [BigInteger] instances
+ * Defines `until` infix function for [Number] and [BigInteger] as for two [BigInteger] instances.
  * @receiver The first number
  * @param number The border number
  * @return Ascending [sequences.BigIntegerRange] from the [this] up to [number] (exclusive)
@@ -270,7 +270,7 @@ infix fun BigInteger.until(number: BigInteger) = range(this, number.toBigInteger
 infix fun Number.until(number: BigInteger) = range(this, number.toBigInteger().dec())
 
 /**
- * Defines `until` infix function for [BigInteger] and [Number] as for two [BigInteger] instances
+ * Defines `until` infix function for [BigInteger] and [Number] as for two [BigInteger] instances.
  * @receiver The first number
  * @param number The border number
  * @return Ascending [sequences.BigIntegerRange] from the [this] up to [number] (exclusive)
@@ -295,7 +295,7 @@ infix fun BigInteger.until(number: Number) = range(this, number.toBigInteger().d
 infix fun BigInteger.downTo(number: BigInteger) = progression(this, number, -BigInteger.ONE)
 
 /**
- * Defines `downTo` infix function for [BigInteger] and [Number] as for two [BigInteger] instances
+ * Defines `downTo` infix function for [BigInteger] and [Number] as for two [BigInteger] instances.
  * @receiver The first number
  * @param number The border number
  * @return Descending [sequences.BigIntegerRange] from the [this] down to [number] (inclusive)
@@ -307,7 +307,7 @@ infix fun BigInteger.downTo(number: BigInteger) = progression(this, number, -Big
 infix fun Number.downTo(number: BigInteger) = progression(this, number, -BigInteger.ONE)
 
 /**
- * Defines `downTo` infix function for [Number] and [BigInteger] as for two [BigInteger] instances
+ * Defines `downTo` infix function for [Number] and [BigInteger] as for two [BigInteger] instances.
  * @receiver The first number
  * @param number The border number
  * @return Descending [sequences.BigIntegerRange] from the [this] down to [number] (inclusive)
@@ -319,7 +319,7 @@ infix fun Number.downTo(number: BigInteger) = progression(this, number, -BigInte
 infix fun BigInteger.downTo(number: Number) = progression(this, number, -BigInteger.ONE)
 
 /**
- * Represents a mathematical positive infinity
+ * Represents a mathematical positive infinity.
  */
 object PositiveInfinity {
     /**
@@ -362,12 +362,12 @@ object NegativeInfinity {
     override fun toString() = "-∞"
 }
 /**
- * [∞][Infinity] is assumed to be [+∞][PositiveInfinity] by default in mathematics
+ * [∞][Infinity] is assumed to be [+∞][PositiveInfinity] by default in mathematics.
  */
 typealias Infinity = PositiveInfinity
 
 /**
- * Infinite ascending [sequences.BigIntegerRange] starting with the given [number][this]
+ * Infinite ascending [sequences.BigIntegerRange] starting with the given [number][this].
  * @receiver the first number
  * @see PositiveInfinity
  * @return [sequences.BigIntegerRange]
@@ -375,7 +375,7 @@ typealias Infinity = PositiveInfinity
 infix fun Number.until(@Suppress("UNUSED_PARAMETER") infinity: Infinity) = range(this.toBigInteger(), null)
 
 /**
- * Infinite ascending [sequences.BigIntegerRange] starting with the given [number][this]
+ * Infinite ascending [sequences.BigIntegerRange] starting with the given [number][this].
  * @receiver the first number
  * @see PositiveInfinity
  * @return [sequences.BigIntegerRange]
@@ -383,7 +383,7 @@ infix fun Number.until(@Suppress("UNUSED_PARAMETER") infinity: Infinity) = range
 operator fun Number.rangeTo(@Suppress("UNUSED_PARAMETER") infinity: Infinity) = range(this.toBigInteger(), null)
 
 /**
- * Infinite descending [sequences.BigIntegerRange] starting with the given [number][this]
+ * Infinite descending [sequences.BigIntegerRange] starting with the given [number][this].
  * @receiver the first number
  * @see NegativeInfinity
  * @return [sequences.BigIntegerProgression]
