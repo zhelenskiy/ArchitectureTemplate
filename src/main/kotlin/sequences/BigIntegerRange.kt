@@ -10,10 +10,10 @@ import java.math.BigInteger
  * * [SingleRange] when it is single
  * * Pure [BigIntegerRange] otherwise
  *
- * @param first [Number] to be converted to [BigInteger] to be [BigIntegerProgression.first]
+ * @param first [Number] to be converted to [BigInteger] to be `first`
  * @param last
  * * When is null, Double.POSITIVE_INFINITY, Float.POSITIVE_INFINITY, the [BigIntegerRange] is infinite
- * * Otherwise, it is a [Number] to be converted to [BigInteger] to be [BigIntegerProgression.first]
+ * * Otherwise, it is a [Number] to be converted to [BigInteger] to be `first`
  * @see IntRange
  * @see LongRange
  */
@@ -32,10 +32,10 @@ fun range(first: Number, last: Number?): BigIntegerRange = range(
  *
  * This function is the main way to construct instances of [BigIntegerRange] and its inheritors.
  *
- * @param first is to be [BigIntegerProgression.first]
+ * @param first is to be `first`
  * @param last
  * * When is null, Double.POSITIVE_INFINITY, Float.POSITIVE_INFINITY, the [BigIntegerRange] is infinite
- * * Otherwise, it is a [Number] to be converted to [BigInteger] to be [BigIntegerProgression.first]
+ * * Otherwise, it is a [Number] to be converted to [BigInteger] to be `first`
  * @see IntRange
  * @see LongRange
  */
@@ -46,22 +46,22 @@ fun range(first: BigInteger, last: BigInteger?): BigIntegerRange = when {
 }
 
 /**
- * Constructs [BigIntegerProgression] with the [first] and the [last] of the [range].
+ * Constructs [BigIntegerProgression] with the `first` and the `last` of the [range].
  */
 fun range(range: BigIntegerRange): BigIntegerRange = range
 
 /**
- * Constructs [BigIntegerProgression] with the converted to [BigInteger] [first] and [last] of the [range].
+ * Constructs [BigIntegerProgression] with the converted to [BigInteger] `first` and `last` of the [range].
  */
 fun range(range: IntRange): BigIntegerRange = range(range.first, range.last)
 
 /**
- * Constructs [BigIntegerProgression] with the converted to [BigInteger] [first] and [last] of the [range].
+ * Constructs [BigIntegerProgression] with the converted to [BigInteger] `first` and `last` of the [range].
  */
 fun range(range: LongRange): BigIntegerRange = range(range.first, range.last)
 
 /**
- * [BigIntegerProgression] with step = 1.
+ * [BigIntegerProgression] with `step` = 1.
  *
  * Undocumented methods are just to specify return type ([BigIntegerRange]) statically.
  * @constructor Should be used only used inside abstract function [range] because otherwise wrong instance (basic [BigIntegerRange] instead of its ancestor) may be used and the invariants brake
@@ -151,7 +151,7 @@ open class BigIntegerRange internal constructor(first: BigInteger, toInclusive: 
      * to the specified [other] object, a negative number if it's less than [other], or a positive number
      * if it's greater than [other].
      *
-     * Compares by [first], then by [last] (assuming +∞ = +∞ > [BigInteger])
+     * Compares by `first`, then by `last` (assuming +∞ = +∞ > [BigInteger])
      */
     override fun compareTo(other: BigIntegerRange): Int =
         this.first.compareTo(other.first).takeIf { it != 0 } ?: when {

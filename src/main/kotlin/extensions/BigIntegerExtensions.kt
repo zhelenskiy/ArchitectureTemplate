@@ -323,19 +323,19 @@ infix fun BigInteger.downTo(number: Number) = progression(this, number, -BigInte
  */
 object PositiveInfinity {
     /**
-     * `+(+∞) = +∞`
+     * +(+∞) = +∞
      * @return [+∞][PositiveInfinity]
      */
     operator fun unaryPlus() = PositiveInfinity
 
     /**
-     * `-(+∞) = -∞`
+     * -(+∞) = -∞
      * @return [-∞][NegativeInfinity]
      */
     operator fun unaryMinus() = NegativeInfinity
 
     /**
-     * `+∞`
+     * +∞
      */
     override fun toString() = "+∞"
 }
@@ -345,19 +345,19 @@ object PositiveInfinity {
  */
 object NegativeInfinity {
     /**
-     * `+(-∞) = -∞`
+     * +(-∞) = -∞
      * @return [-∞][NegativeInfinity]
      */
     operator fun unaryPlus() = NegativeInfinity
 
     /**
-     * `-(-∞) = +∞`
+     * -(-∞) = +∞
      * @return [+∞][PositiveInfinity]
      */
     operator fun unaryMinus() = PositiveInfinity
 
     /**
-     * `-∞`
+     * -∞
      */
     override fun toString() = "-∞"
 }
