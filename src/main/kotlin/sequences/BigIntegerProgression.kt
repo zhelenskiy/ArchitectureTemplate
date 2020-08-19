@@ -12,13 +12,12 @@ import kotlin.collections.HashSet
 import kotlin.math.sign
 
 /**
- * Abstract function that returns
+ * Abstract function that constructs [BigIntegerProgression] and its inheritors.
+ * @return
  * * [EmptyRange] when built [BigIntegerProgression] is empty
  * * [SingleRange] when it is single
  * * [BigIntegerRange] when step is 1 and there are more than 1 elements
  * * Pure [BigIntegerProgression] otherwise
- *
- * This function is the main way to construct instances of [BigIntegerProgression] and its inheritors.
  *
  * @param first The first value of the progression (unless it is empty)
  * @param step Nonnull value to be added to calculate the next element
@@ -41,12 +40,12 @@ fun progression(first: BigInteger, toInclusive: BigInteger?, step: BigInteger = 
 }
 
 /**
- * Returns [BigIntegerProgression] with the same [first], [last] and [step] as the [progression].
+ * Constructs [BigIntegerProgression] with the same [first], [last] and [step] as the [progression].
  */
 fun progression(progression: BigIntegerProgression): BigIntegerProgression = progression
 
 /**
- * Returns [BigIntegerProgression] with the converted to [BigInteger] [first], [last] and [step] of the [progression].
+ * Constructs [BigIntegerProgression] with the converted to [BigInteger] [first], [last] and [step] of the [progression].
  */
 fun progression(progression: IntProgression): BigIntegerProgression = progression(
     progression.first.toBigInteger(),
@@ -55,7 +54,7 @@ fun progression(progression: IntProgression): BigIntegerProgression = progressio
 )
 
 /**
- * Returns [BigIntegerProgression] with the converted to [BigInteger] [first], [last] and [step] of the [progression].
+ * Constructs [BigIntegerProgression] with the converted to [BigInteger] [first], [last] and [step] of the [progression].
  */
 fun progression(progression: LongProgression): BigIntegerProgression = progression(
     progression.first.toBigInteger(),
@@ -64,11 +63,14 @@ fun progression(progression: LongProgression): BigIntegerProgression = progressi
 )
 
 /**
- * Abstract function that returns
+ * Abstract function that constructs [BigIntegerProgression] and its inheritors.
+ * @return
  * * [EmptyRange] when built [BigIntegerProgression] is empty
  * * [SingleRange] when it is single
  * * [BigIntegerRange] when step is 1 and there are more than 1 elements
  * * Pure [BigIntegerProgression] otherwise
+ *
+ * This function is the main way to construct instances of [BigIntegerProgression] and its inheritors.
  *
  * @param first The first value (after conversation to [BigInteger]) of the progression (unless it is empty)
  * @param step Nonnull value (after conversation to [BigInteger]) to be added to calculate the next element
@@ -136,7 +138,6 @@ open class BigIntegerProgression internal constructor(
      * Indicates if the [BigIntegerProgression] is empty.
      */
     fun isEmpty(): Boolean = last == first - step
-
 
     /**
      * Indicates if the [BigIntegerProgression] is infinite.
