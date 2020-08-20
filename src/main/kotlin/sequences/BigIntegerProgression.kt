@@ -14,17 +14,17 @@ import kotlin.math.sign
 /**
  * Abstract function that constructs [BigIntegerProgression] and its inheritors.
  * @return
- * * [EmptyRange] when built [BigIntegerProgression] is empty
- * * [SingleRange] when it is single
- * * [BigIntegerRange] when `step` is 1 and there are more than 1 elements
+ * * [EmptyRange] when resulting [BigIntegerProgression] is empty
+ * * [SingleRange] when it contains one element
+ * * [BigIntegerRange] when `step` is 1 and resulting [BigIntegerProgression] contains more than one element
  * * Pure [BigIntegerProgression] otherwise
  *
  * @param first The first value of the progression (unless it is empty)
- * @param step Nonnull value to be added to calculate the next element
+ * @param step Non-null value to be added to calculate the next element
  * @param toInclusive
- * * When is `null`, the progression is infinite
- * * When [step] is positive, the top border number
- * * When [step] is negative, the bottom border number
+ * * When `null`, the progression is infinite
+ * * When [step] is positive, the least upper bound integer
+ * * When [step] is negative, the greatest lower bound integer
  * @throws IllegalArgumentException When [step] is 0
  * @see IntProgression
  * @see LongProgression
@@ -40,7 +40,7 @@ fun progression(first: BigInteger, toInclusive: BigInteger?, step: BigInteger = 
 }
 
 /**
- * Constructs [BigIntegerProgression] with the same `first`, `last` and `step` as the [progression].
+ * Constructs [BigIntegerProgression] with the same `first`, `last` and `step` as in the [progression].
  */
 fun progression(progression: BigIntegerProgression): BigIntegerProgression = progression
 
@@ -66,20 +66,20 @@ fun progression(progression: LongProgression): BigIntegerProgression = progressi
  * Abstract function that constructs [BigIntegerProgression] and its inheritors.
  * @return
  * * [EmptyRange] when built [BigIntegerProgression] is empty
- * * [SingleRange] when it is single
- * * [BigIntegerRange] when `step` is 1 and there are more than 1 elements
+ * * [SingleRange] when it contains one element
+ * * [BigIntegerRange] when `step` is 1 and resulting [BigIntegerProgression] contains more than one element
  * * Pure [BigIntegerProgression] otherwise
  *
  * This function is the main way to construct instances of [BigIntegerProgression] and its inheritors.
  *
  * @param first The first value (after conversation to [BigInteger]) of the progression (unless it is empty)
- * @param step Nonnull value (after conversation to [BigInteger]) to be added to calculate the next element
+ * @param step Non-null value (after conversation to [BigInteger]) to be added to calculate the next element
  * @param toInclusive
- * * When is `null`, the progression is infinite
- * * When is `Double.POSITIVE_INFINITY` or `Float.POSITIVE_INFINITY` and [step] is positive, the progression is infinite
- * * When is `Double.NEGATIVE_INFINITY` or `Float.NEGATIVE_INFINITY` and [step] is negative, the progression is infinite
- * * When converted to [BigInteger] [step] is positive, the top border number
- * * When converted to [BigInteger] [step] is negative, the bottom border number
+ * * When `null`, the progression is infinite
+ * * When equals to `Double.POSITIVE_INFINITY` or `Float.POSITIVE_INFINITY` and [step] is positive, the progression is infinite
+ * * When equals to `Double.NEGATIVE_INFINITY` or `Float.NEGATIVE_INFINITY` and [step] is negative, the progression is infinite
+ * * When converted to [BigInteger] [step] is positive, the least upper bound integer
+ * * When converted to [BigInteger] [step] is negative, the greatest lower bound integer
  * @throws IllegalArgumentException When [step] is 0
  * @see IntProgression
  * @see LongProgression
@@ -96,12 +96,12 @@ fun progression(first: Number, toInclusive: Number?, step: Number): BigIntegerPr
 )
 
 /**
- * Arithmetic progression of [BigInteger]s with nonnull `step`.
+ * Arithmetic progression of [BigInteger]s with non-null `step`.
  * @constructor Should be used only used inside abstract function [progression] because otherwise wrong instance (basic [BigIntegerProgression] instead of its ancestor) may be used and the invariants brake
  * @property first The first value of the progression
  * @property step Nonnull value to be added to calculate the next element
  * @param toInclusive
- * * When is `null`, the progression is infinite
+ * * When `null`, the progression is infinite
  * * When `step` is positive, the top border number
  * * When `step` is negative, the bottom border number
  * @throws IllegalArgumentException When `step` is 0
@@ -131,13 +131,18 @@ open class BigIntegerProgression internal constructor(
         step < 0 && toInclusive > first -> first - step
         step > 0 -> first + (toInclusive - first) / step * step
         step < 0 -> first + (first - toInclusive) / -step * step
-        else -> throw IllegalStateException("Can not happen")
+        else -> throw IllegalStateException("Cannot happen")
     }
 
     /**
      * Indicates if the [BigIntegerProgression] is empty.
      */
     fun isEmpty(): Boolean = last == first - step
+
+    /**
+     * Indicates if the [BigIntegerProgression] is not empty.
+     */
+    fun isNotEmpty(): Boolean = !isEmpty()
 
     /**
      * Indicates if the [BigIntegerProgression] is infinite.
@@ -150,15 +155,10 @@ open class BigIntegerProgression internal constructor(
     fun isFinite(): Boolean = !isInfinite()
 
     /**
-     * Indicates if the [BigIntegerProgression] is not empty.
-     */
-    fun isNotEmpty(): Boolean = !isEmpty()
-
-    /**
      * Finds count of the sequence (yields O(1) time capacity assuming [BigInteger] arithmetic operations to take O(1) time).
      * @return
      * * `null` when the [sequence][BigIntegerProgression] is infinite
-     * * nonnull number of elements otherwise
+     * * non-null number of elements otherwise
      */
     fun count(): BigInteger? = when {
         isInfinite() -> null
@@ -191,7 +191,7 @@ open class BigIntegerProgression internal constructor(
 
 
     /**
-     * Returns an [Iterator] that returns the values from the sequence.
+     * Returns an [Iterator] over values from the sequence.
      *
      * Throws an exception if the sequence is constrained to be iterated once and `iterator` is invoked the second time.
      */
@@ -255,16 +255,16 @@ open class BigIntegerProgression internal constructor(
     /**
      * [String] representation for the [BigIntegerProgression].
      * @return
-     * * "[]" when empty
-     * * "[" + [the only element][SingleRange.only] + "]" + when is single
-     * * "[" + `first` + ".." + `last` + "]" when is finite ascending progression with `step` = 1
-     * * "[" + `first` + ".." + `last` + "] step `step`" when is finite ascending progression with `step` ≠ 1
-     * * "[" + `first` + " downTo " + `last` + "]" when is finite descending progression with `step` = 1
-     * * "[" + `first` + " downTo " + `last` + "] step `step`" when is finite descending progression with `step` ≠ 1
-     * * "[" + `first` + "..+∞)" when is infinite ascending progression with `step` = 1
-     * * "[" + `first` + "..+∞) step `step`" when is infinite ascending progression with `step` ≠ 1
-     * * "[" + `first` + " downTo -∞)" when is infinite descending progression with `step` = 1
-     * * "[" + `first` + " downTo -∞) step `step`" when is infinite descending progression with `step` ≠ 1
+     * * "[]" when is empty
+     * * "[" + [the only element][SingleRange.only] + "]" when is single
+     * * "[" + `first` + ".." + `last` + "]" when is finite increasing progression with `step` = 1
+     * * "[" + `first` + ".." + `last` + "] step `step`" when is finite increasing progression with `step` ≠ 1
+     * * "[" + `first` + " downTo " + `last` + "]" when is finite decreasing progression with `step` = 1
+     * * "[" + `first` + " downTo " + `last` + "] step `step`" when is finite decreasing progression with `step` ≠ 1
+     * * "[" + `first` + "..+∞)" when is infinite increasing progression with `step` = 1
+     * * "[" + `first` + "..+∞) step `step`" when is infinite increasing progression with `step` ≠ 1
+     * * "[" + `first` + " downTo -∞)" when is infinite decreasing progression with `step` = 1
+     * * "[" + `first` + " downTo -∞) step `step`" when is infinite decreasing progression with `step` ≠ 1
      */
     override fun toString() = when {
         isEmpty() -> "[]"
@@ -392,7 +392,7 @@ open class BigIntegerProgression internal constructor(
     /**
      * Gets element by the specified [index] (since 0) (converted to [BigInteger]) or calls [defaultValue] with [index] if the [index] is out of range.
      *
-     * The [defaultValue] is be called if the [index] is negative or if it is not less than [count].
+     * The [defaultValue] is returned if the [index] is negative or if it is not less than [count].
      *
      * Yields O(1) time capacity.
      */
@@ -433,8 +433,8 @@ open class BigIntegerProgression internal constructor(
     /**
      * Returns
      * * null when the [progression][BigIntegerProgression] is empty
-     * *`Double.POSITIVE_INFINITY` if the sequence is infinite and ascending
-     * *`Double.NEGATIVE_INFINITY` if the sequence is infinite and descending
+     * *`Double.POSITIVE_INFINITY` if the sequence is infinite and increasing
+     * *`Double.NEGATIVE_INFINITY` if the sequence is infinite and decreasing
      * * The `last` element otherwise
      *
      * Yields O(1) time capacity.
@@ -450,8 +450,8 @@ open class BigIntegerProgression internal constructor(
      *
      * @return
      * * null when the [progression][BigIntegerProgression] is empty
-     * * `Double.POSITIVE_INFINITY` when the [progression][BigIntegerProgression] is infinite and ascending
-     * * `last` when the [progression][BigIntegerProgression] is finite and ascending
+     * * `Double.POSITIVE_INFINITY` when the [progression][BigIntegerProgression] is infinite and increasing
+     * * `last` when the [progression][BigIntegerProgression] is finite and increasing
      * * `first` otherwise
      */
     fun max(): Number? = when {
@@ -465,8 +465,8 @@ open class BigIntegerProgression internal constructor(
      *
      * @return
      * * null when the [progression][BigIntegerProgression] is empty
-     * * `Double.NEGATIVE_INFINITY` when the [progression][BigIntegerProgression] is infinite and descending
-     * * `last` when the [progression][BigIntegerProgression] is finite and descending
+     * * `Double.NEGATIVE_INFINITY` when the [progression][BigIntegerProgression] is infinite and decreasing
+     * * `last` when the [progression][BigIntegerProgression] is finite and decreasing
      * * `first` otherwise
      */
     fun min(): Number? = when {
@@ -670,7 +670,7 @@ open class BigIntegerProgression internal constructor(
 }
 
 /**
- * Exception that is thrown when the called operation does not work fine only for infinite operations and it can not be stopped stop its execution (by some other [Exception]).
+ * Exception that is thrown when the called operation does not work fine only for infinite operations and it cannot stop its execution (by some other [Exception]).
  */
 class InfiniteProgressionException(message: String = "The function evaluation is infinite") :
     UnsupportedOperationException(message)
@@ -678,7 +678,7 @@ class InfiniteProgressionException(message: String = "The function evaluation is
 /**
  * The singleton represents empty [BigIntegerProgression], [sequences.BigIntegerRange].
  *
- * All methods here are just to specify return type ([EmptyRange]) statically.
+ * All methods here are designed to specify return type ([EmptyRange]) statically.
  *
  * Method [toString] works as it is defined in [BigIntegerProgression].
  */
@@ -702,7 +702,7 @@ object EmptyRange : BigIntegerRange(BigInteger.ONE, BigInteger.ZERO) {
 /**
  * The class represents [BigIntegerProgression], [sequences.BigIntegerRange] with exact 1 element.
  *
- * All methods here are just to specify return type ([EmptyRange]) statically.
+ * All methods here are designed to specify return type ([EmptyRange]) statically.
  *
  * Method [toString] works as it is defined in [BigIntegerProgression].
  *

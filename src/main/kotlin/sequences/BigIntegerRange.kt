@@ -6,14 +6,14 @@ import java.math.BigInteger
 /**
  * Abstract function that constructs [BigIntegerRange] and its inheritors.
  * @return
- * * [EmptyRange] when built [BigIntegerRange] is empty
+ * * [EmptyRange] when resulting [BigIntegerRange] is empty
  * * [SingleRange] when it is single
  * * Pure [BigIntegerRange] otherwise
  *
- * @param first [Number] to be converted to [BigInteger] to be `first`
+ * @param first [Number] to start the [BigIntegerRange] with. Will be converted to [BigInteger].
  * @param last
- * * When is null, Double.POSITIVE_INFINITY, Float.POSITIVE_INFINITY, the [BigIntegerRange] is infinite
- * * Otherwise, it is a [Number] to be converted to [BigInteger] to be `first`
+ * * When `null`, `Double.POSITIVE_INFINITY` or `Float.POSITIVE_INFINITY`, the resulting [BigIntegerRange] is infinite
+ * * Otherwise, it is a [Number] to end the [BigIntegerRange] with. Will be converted to [BigInteger].
  * @see IntRange
  * @see LongRange
  */
@@ -26,16 +26,16 @@ fun range(first: Number, last: Number?): BigIntegerRange = range(
 /**
  * Abstract function that constructs [BigIntegerRange] and its inheritors.
  * @return
- * * [EmptyRange] when built [BigIntegerRange] is empty
+ * * [EmptyRange] when resulting [BigIntegerRange] is empty
  * * [SingleRange] when it is single
  * * Pure [BigIntegerRange] otherwise
  *
  * This function is the main way to construct instances of [BigIntegerRange] and its inheritors.
  *
- * @param first is to be `first`
+ * @param first [BigInteger] to start the [BigIntegerRange] with.
  * @param last
- * * When is null, Double.POSITIVE_INFINITY, Float.POSITIVE_INFINITY, the [BigIntegerRange] is infinite
- * * Otherwise, it is a [Number] to be converted to [BigInteger] to be `first`
+ * * When `null`, `Double.POSITIVE_INFINITY` or `Float.POSITIVE_INFINITY`, the resulting [BigIntegerRange] is infinite
+ * * Otherwise, it is a [BigInteger] to end the [BigIntegerRange] with.
  * @see IntRange
  * @see LongRange
  */
@@ -46,28 +46,28 @@ fun range(first: BigInteger, last: BigInteger?): BigIntegerRange = when {
 }
 
 /**
- * Constructs [BigIntegerProgression] with the `first` and the `last` of the [range].
+ * Constructs [BigIntegerProgression] with the `first` and the `last` numbers of the [range].
  */
 fun range(range: BigIntegerRange): BigIntegerRange = range
 
 /**
- * Constructs [BigIntegerProgression] with the converted to [BigInteger] `first` and `last` of the [range].
+ * Constructs [BigIntegerProgression] using [IntRange] by converting its bounds to [BigInteger].
  */
 fun range(range: IntRange): BigIntegerRange = range(range.first, range.last)
 
 /**
- * Constructs [BigIntegerProgression] with the converted to [BigInteger] `first` and `last` of the [range].
+ * Constructs [BigIntegerProgression] using [LongRange] by converting its bounds to [BigInteger].
  */
 fun range(range: LongRange): BigIntegerRange = range(range.first, range.last)
 
 /**
  * [BigIntegerProgression] with `step` = 1.
  *
- * Undocumented methods are just to specify return type ([BigIntegerRange]) statically.
- * @constructor Should be used only used inside abstract function [range] because otherwise wrong instance (basic [BigIntegerRange] instead of its ancestor) may be used and the invariants brake
+ * Undocumented methods are designed to specify return type ([BigIntegerRange]) statically.
+ * @constructor Should be used only inside abstract function [range]. Otherwise wrong instance (basic [BigIntegerRange] instead of its ancestor) can be created and the invariants can be broken.
  * @property first The first value of the progression
  * @param toInclusive
- * * When is `null`, the progression is infinite
+ * * When `null`, the progression is infinite
  * * The last number otherwise
  * @see IntRange
  * @see LongRange
@@ -76,7 +76,7 @@ open class BigIntegerRange internal constructor(first: BigInteger, toInclusive: 
     BigIntegerProgression(first, toInclusive, BigInteger.ONE), Comparable<BigIntegerRange> {
 
     /**
-     * Finds maximal [BigIntegerRange] that is contained by both [BigIntegerRange]s yielding O(1) time capacity.
+     * Finds maximal [BigIntegerRange] that is included in both [BigIntegerRange]s yielding O(1) time capacity.
      */
     open infix fun intersect(other: BigIntegerRange): BigIntegerRange = range(
         maxOf(this.first, other.first),
@@ -84,9 +84,9 @@ open class BigIntegerRange internal constructor(first: BigInteger, toInclusive: 
     )
 
     /**
-     * Finds maximal [BigIntegerRange] that is contained by both [BigIntegerRange]s yielding O(1) time capacity.
+     * Finds maximal [BigIntegerRange] that is included in both [BigIntegerRange]s yielding O(1) time capacity.
      *
-     * The method is to specify return type statically.
+     * The method is designed to specify return type statically.
      */
     infix fun intersect(@Suppress("UNUSED_PARAMETER") other: EmptyRange) = EmptyRange
 
@@ -96,7 +96,7 @@ open class BigIntegerRange internal constructor(first: BigInteger, toInclusive: 
     open infix fun intersect(other: IntRange): BigIntegerRange = intersect(range(other))
 
     /**
-     * Finds maximal [BigIntegerRange] that is contained by both [BigIntegerRange] and [LongRange] converted to [BigIntegerRange] yielding O(1) time capacity.
+     * Finds maximal [BigIntegerRange] that is included in both [BigIntegerRange] and [LongRange] converted to [BigIntegerRange] yielding O(1) time capacity.
      */
     open infix fun intersect(other: LongRange): BigIntegerRange = intersect(range(other))
 
