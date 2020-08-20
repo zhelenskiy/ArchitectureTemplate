@@ -10,7 +10,7 @@ Abstract function that constructs [BigIntegerProgression](-big-integer-progressi
 
 
 #### Return  
-<ul><li>[EmptyRange](-empty-range/index.md) when built [BigIntegerProgression](-big-integer-progression/index.md) is empty</li><li>[SingleRange](-single-range/index.md) when it is single</li><li>[BigIntegerRange](-big-integer-range/index.md) when step is 1 and there are more than 1 elements</li><li>Pure [BigIntegerProgression](-big-integer-progression/index.md) otherwise</li></ul>  
+<ul><li>[EmptyRange](-empty-range/index.md) when resulting [BigIntegerProgression](-big-integer-progression/index.md) is empty</li><li>[SingleRange](-single-range/index.md) when it contains one element</li><li>[BigIntegerRange](-big-integer-range/index.md) when step is 1 and resulting [BigIntegerProgression](-big-integer-progression/index.md) contains more than one element</li><li>Pure [BigIntegerProgression](-big-integer-progression/index.md) otherwise</li></ul>  
   
 
 
@@ -32,8 +32,8 @@ jvm
 |  Name|  Summary| 
 |---|---|
 | first| The first value of the progression (unless it is empty)
-| step| Nonnull value to be added to calculate the next element
-| toInclusive| <ul><li>When is null, the progression is infinite</li><li>When [step]() is positive, the top border number</li><li>When [step]() is negative, the bottom border number</li></ul>
+| step| Non-null value to be added to calculate the next element
+| toInclusive| <ul><li>When null, the progression is infinite</li><li>When [step]() is positive, the least upper bound integer</li><li>When [step]() is negative, the greatest lower bound integer</li></ul>
   
   
 Content  
@@ -42,7 +42,7 @@ fun [progression](progression.md)(first: [BigInteger](https://docs.oracle.com/ja
 
 [jvm]  
 Brief description  
-Constructs [BigIntegerProgression](-big-integer-progression/index.md) with the same first, last and step as the [progression]().  
+Constructs [BigIntegerProgression](-big-integer-progression/index.md) with the same first, last and step as in the [progression]().  
   
   
 Content  
@@ -66,7 +66,7 @@ Abstract function that constructs [BigIntegerProgression](-big-integer-progressi
 
 
 #### Return  
-<ul><li>[EmptyRange](-empty-range/index.md) when built [BigIntegerProgression](-big-integer-progression/index.md) is empty</li><li>[SingleRange](-single-range/index.md) when it is single</li><li>[BigIntegerRange](-big-integer-range/index.md) when step is 1 and there are more than 1 elements</li><li>Pure [BigIntegerProgression](-big-integer-progression/index.md) otherwise</li></ul>This function is the main way to construct instances of [BigIntegerProgression](-big-integer-progression/index.md) and its inheritors.  
+<ul><li>[EmptyRange](-empty-range/index.md) when built [BigIntegerProgression](-big-integer-progression/index.md) is empty</li><li>[SingleRange](-single-range/index.md) when it contains one element</li><li>[BigIntegerRange](-big-integer-range/index.md) when step is 1 and resulting [BigIntegerProgression](-big-integer-progression/index.md) contains more than one element</li><li>Pure [BigIntegerProgression](-big-integer-progression/index.md) otherwise</li></ul>This function is the main way to construct instances of [BigIntegerProgression](-big-integer-progression/index.md) and its inheritors.  
   
 
 
@@ -88,8 +88,8 @@ jvm
 |  Name|  Summary| 
 |---|---|
 | first| The first value (after conversation to [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html)) of the progression (unless it is empty)
-| step| Nonnull value (after conversation to [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html)) to be added to calculate the next element
-| toInclusive| <ul><li>When is null, the progression is infinite</li><li>When is Double.POSITIVE_INFINITY or Float.POSITIVE_INFINITY and [step]() is positive, the progression is infinite</li><li>When is Double.NEGATIVE_INFINITY or Float.NEGATIVE_INFINITY and [step]() is negative, the progression is infinite</li><li>When converted to [BigInteger]() is positive, the top border number</li><li>When converted to [BigInteger]() is negative, the bottom border number</li></ul>
+| step| Non-null value (after conversation to [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html)) to be added to calculate the next element
+| toInclusive| <ul><li>When null, the progression is infinite</li><li>When equals to Double.POSITIVE_INFINITY or Float.POSITIVE_INFINITY and [step]() is positive, the progression is infinite</li><li>When equals to Double.NEGATIVE_INFINITY or Float.NEGATIVE_INFINITY and [step]() is negative, the progression is infinite</li><li>When converted to [BigInteger]() is positive, the least upper bound integer</li><li>When converted to [BigInteger]() is negative, the greatest lower bound integer</li></ul>
   
   
 Content  

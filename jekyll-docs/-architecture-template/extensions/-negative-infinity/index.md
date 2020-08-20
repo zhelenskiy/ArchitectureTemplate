@@ -6,7 +6,7 @@ title: NegativeInfinity -
 
 
 # NegativeInfinity  
- [jvm] Represents a mathematical negative infinity  
+ [jvm] Represents mathematical negative infinity  
   
 object [NegativeInfinity](index.md)   
 

@@ -10,7 +10,7 @@ Gets max element yielding O(1) time capacity.
 
 
 #### Return  
-<ul><li>null when the [progression](index.md) is empty</li><li>Double.POSITIVE_INFINITY when the [progression](index.md) is infinite and ascending</li><li>last when the [progression](index.md) is finite and ascending</li><li>first otherwise</li></ul>  
+<ul><li>null when the [progression](index.md) is empty</li><li>Double.POSITIVE_INFINITY when the [progression](index.md) is infinite and increasing</li><li>last when the [progression](index.md) is finite and increasing</li><li>first otherwise</li></ul>  
   
   
 Content  

@@ -5,7 +5,7 @@
 # minus  
 [jvm]  
 Brief description  
-Redefines minus operator for [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html) and [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html) instances. The purpose of the redefinition is to resolve [BigInteger] - [BigInteger] when [BigInteger] - [Number] and [Number] - [BigInteger] are defined.  
+Redefines minus operator for two [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html) instances. The purpose of the redefinition is to resolve [BigInteger] - [BigInteger] when [BigInteger] - [Number] and [Number] - [BigInteger] are defined.  
   
 
 
@@ -40,7 +40,7 @@ operator fun [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/Bi
 
 [jvm]  
 Brief description  
-Subtracts [Number](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html) and [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html) as two [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html) instances.  
+Subtracts [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html) from [Number](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html) interpreted as [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html).  
   
 
 
@@ -75,7 +75,7 @@ operator fun [Number](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-numbe
 
 [jvm]  
 Brief description  
-Subtracts [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html) and [Number](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html) as two [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html) instances.  
+Subtracts [Number](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html) interpreted as [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html) from [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html).  
   
 
 

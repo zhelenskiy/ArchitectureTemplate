@@ -6,7 +6,7 @@ title: PositiveInfinity -
 
 
 # PositiveInfinity  
- [jvm] Represents a mathematical positive infinity.  
+ [jvm] Represents mathematical positive infinity.  
   
 object [PositiveInfinity](index.md)   
 

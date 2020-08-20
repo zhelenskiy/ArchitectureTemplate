@@ -10,7 +10,7 @@ Defines downTo infix function for [BigInteger](https://docs.oracle.com/javase/8/
 
 
 #### Return  
-Descending [sequences.BigIntegerProgression](../sequences/-big-integer-progression/index.md) from the [this]() down to [number]() (inclusive)  
+Decreasing [sequences.BigIntegerProgression](../sequences/-big-integer-progression/index.md) from the [this]() down to [number]() (inclusive)  
   
 
 
@@ -34,8 +34,8 @@ jvm
   
 |  Name|  Summary| 
 |---|---|
-| <receiver>| The first number
-| number| The border number
+| <receiver>| The least upper bound integer
+| number| The greatest lower bound integer
   
   
 Content  
@@ -49,7 +49,7 @@ Defines downTo infix function for [BigInteger](https://docs.oracle.com/javase/8/
 
 
 #### Return  
-Descending [sequences.BigIntegerRange](../sequences/-big-integer-range/index.md) from the [this]() down to [number]() (inclusive)  
+Decreasing [sequences.BigIntegerRange](../sequences/-big-integer-range/index.md) from [this]() down to [number]() (inclusive)  
   
 
 
@@ -72,8 +72,8 @@ jvm
   
 |  Name|  Summary| 
 |---|---|
-| <receiver>| The first number
-| number| The border number
+| <receiver>| The least upper bound integer
+| number| The greatest lower bound integer
   
   
 Content  
@@ -87,7 +87,7 @@ Defines downTo infix function for [Number](https://kotlinlang.org/api/latest/jvm
 
 
 #### Return  
-Descending [sequences.BigIntegerRange](../sequences/-big-integer-range/index.md) from the [this]() down to [number]() (inclusive)  
+Decreasing [sequences.BigIntegerRange](../sequences/-big-integer-range/index.md) from [this]() down to [number]() (inclusive)  
   
 
 
@@ -110,8 +110,8 @@ jvm
   
 |  Name|  Summary| 
 |---|---|
-| <receiver>| The first number
-| number| The border number
+| <receiver>| The least upper bound integer
+| number| The greatest lower bound integer
   
   
 Content  
@@ -120,7 +120,7 @@ infix fun [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigIn
 
 [jvm]  
 Brief description  
-Infinite descending [sequences.BigIntegerRange](../sequences/-big-integer-range/index.md) starting with the given [number]().  
+Infinite decreasing [sequences.BigIntegerRange](../sequences/-big-integer-range/index.md) starting with the given [number]().  
   
 
 

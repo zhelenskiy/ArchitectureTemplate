@@ -40,7 +40,7 @@ operator fun [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/Bi
 
 [jvm]  
 Brief description  
-Divides [Number](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html) and [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html) as two [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html) instances.  
+Divides [Number](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html) interpreted as [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html) by [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html).  
   
 
 
@@ -75,7 +75,7 @@ operator fun [Number](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-numbe
 
 [jvm]  
 Brief description  
-Divides [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html) and [Number](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html) as two [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html) instances.  
+Divides [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html) and [Number](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html) interpreted as [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html).  
   
 
 

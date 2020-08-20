@@ -10,7 +10,7 @@ Gets min element yielding O(1) time capacity.
 
 
 #### Return  
-<ul><li>null when the [progression](index.md) is empty</li><li>Double.NEGATIVE_INFINITY when the [progression](index.md) is infinite and descending</li><li>last when the [progression](index.md) is finite and descending</li><li>first otherwise</li></ul>  
+<ul><li>null when the [progression](index.md) is empty</li><li>Double.NEGATIVE_INFINITY when the [progression](index.md) is infinite and decreasing</li><li>last when the [progression](index.md) is finite and decreasing</li><li>first otherwise</li></ul>  
   
   
 Content  

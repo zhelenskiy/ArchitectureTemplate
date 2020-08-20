@@ -5,7 +5,7 @@
 # elementAtOrNull  
 [jvm]  
 Brief description  
-Gets element by the specified [index]() (since 0) (converted to [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html)) or null if the [index]() is out of range.Null is returned if the [index]() is negative or if it is not less than [count](count.md).Yields O(1) time capacity.  
+Gets element by the specified [index]() (since 0) (converted to [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html)) or null if the [index]() is out of range.null is returned if the [index]() is negative or if it is not less than [count](count.md).Yields O(1) time capacity.  
   
   
 Content  
@@ -14,7 +14,7 @@ fun [elementAtOrNull](element-at-or-null.md)(index: [Number](https://kotlinlang.
 
 [jvm]  
 Brief description  
-Gets element by the specified [index]() (since 0) or null if the index is out of range.Null is returned if the [index]() is negative or if it is not less than [count](count.md).Yields O(1) time capacity.  
+Gets element by the specified [index]() (since 0) or null if the index is out of range.null is returned if the [index]() is negative or if it is not less than [count](count.md).Yields O(1) time capacity.  
   
   
 Content  

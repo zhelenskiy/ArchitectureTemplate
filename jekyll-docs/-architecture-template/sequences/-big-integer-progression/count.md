@@ -13,7 +13,7 @@ Finds count of the sequence (yields O(1) time capacity assuming [BigInteger](htt
 
 
 #### Return  
-<ul><li>null when the [sequence](index.md) is infinite</li><li>nonnull number of elements otherwise</li></ul>  
+<ul><li>null when the [sequence](index.md) is infinite</li><li>Non-null number of elements otherwise</li></ul>  
   
   
 Content  

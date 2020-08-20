@@ -8,7 +8,7 @@ title: intersect -
 # intersect  
 [jvm]  
 Brief description  
-Finds maximal [BigIntegerRange](index.md) that is contained by both [BigIntegerRange](index.md)s yielding O(1) time capacity.  
+Finds maximal [BigIntegerRange](index.md) that is included in both [BigIntegerRange](index.md)s yielding O(1) time capacity.  
   
   
 Content  
@@ -17,7 +17,7 @@ open infix fun [intersect](intersect.md)(other: [BigIntegerRange](index.md)): [B
 
 [jvm]  
 Brief description  
-Finds maximal [BigIntegerRange](index.md) that is contained by both [BigIntegerRange](index.md)s yielding O(1) time capacity.The method is to specify return type statically.  
+Finds maximal [BigIntegerRange](index.md) that is included in both [BigIntegerRange](index.md)s yielding O(1) time capacity.The method is designed to specify return type statically.  
   
   
 Content  
@@ -35,7 +35,7 @@ open infix fun [intersect](intersect.md)(other: [IntRange](https://kotlinlang.or
 
 [jvm]  
 Brief description  
-Finds maximal [BigIntegerRange](index.md) that is contained by both [BigIntegerRange](index.md) and [LongRange](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-long-range/index.html) converted to [BigIntegerRange](index.md) yielding O(1) time capacity.  
+Finds maximal [BigIntegerRange](index.md) that is included in both [BigIntegerRange](index.md) and [LongRange](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-long-range/index.html) converted to [BigIntegerRange](index.md) yielding O(1) time capacity.  
   
   
 Content  

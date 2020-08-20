@@ -10,7 +10,7 @@ Defines rangeTo operator for [BigInteger](https://docs.oracle.com/javase/8/docs/
 
 
 #### Return  
-Ascending [sequences.BigIntegerRange](../sequences/-big-integer-range/index.md) from the [this]() up to [number]() (inclusive)  
+Increasing [sequences.BigIntegerRange](../sequences/-big-integer-range/index.md) from the [this]() up to [number]() (inclusive)  
   
 
 
@@ -34,8 +34,8 @@ jvm
   
 |  Name|  Summary| 
 |---|---|
-| <receiver>| The first number
-| number| The border number
+| <receiver>| The greatest lower bound integer
+| number| The least upper bound integer
   
   
 Content  
@@ -49,7 +49,7 @@ Defines rangeTo operator for [Number](https://kotlinlang.org/api/latest/jvm/stdl
 
 
 #### Return  
-Ascending [sequences.BigIntegerRange](../sequences/-big-integer-range/index.md) from the [this]() up to [number]() (inclusive)  
+Increasing [sequences.BigIntegerRange](../sequences/-big-integer-range/index.md) from [this]() up to [number]() (inclusive)  
   
 
 
@@ -72,8 +72,8 @@ jvm
   
 |  Name|  Summary| 
 |---|---|
-| <receiver>| The first number
-| number| The border number
+| <receiver>| The greatest lower bound integer
+| number| The least upper bound integer
   
   
 Content  
@@ -87,7 +87,7 @@ Defines rangeTo operator for [BigInteger](https://docs.oracle.com/javase/8/docs/
 
 
 #### Return  
-Ascending [sequences.BigIntegerRange](../sequences/-big-integer-range/index.md) from the [this]() up to [number]() (inclusive)  
+Increasing [sequences.BigIntegerRange](../sequences/-big-integer-range/index.md) from [this]() up to [number]() (inclusive)  
   
 
 
@@ -110,8 +110,8 @@ jvm
   
 |  Name|  Summary| 
 |---|---|
-| <receiver>| The first number
-| number| The border number
+| <receiver>| The greatest lower bound integer
+| number| The least upper bound integer
   
   
 Content  
@@ -120,7 +120,7 @@ operator fun [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/Bi
 
 [jvm]  
 Brief description  
-Infinite ascending [sequences.BigIntegerRange](../sequences/-big-integer-range/index.md) starting with the given [number]().  
+Infinite increasing [sequences.BigIntegerRange](../sequences/-big-integer-range/index.md) starting with the given [number]().  
   
 
 

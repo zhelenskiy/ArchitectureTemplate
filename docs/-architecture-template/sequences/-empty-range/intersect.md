@@ -12,7 +12,7 @@ infix fun [intersect](intersect.md)(other: [LongProgression](https://kotlinlang.
 
 [jvm]  
 Brief description  
-Finds maximal [BigIntegerRange](../-big-integer-range/index.md) that is contained by both [BigIntegerRange](../-big-integer-range/index.md)s yielding O(1) time capacity.  
+Finds maximal [BigIntegerRange](../-big-integer-range/index.md) that is included in both [BigIntegerRange](../-big-integer-range/index.md)s yielding O(1) time capacity.  
   
   
 Content  
@@ -30,7 +30,7 @@ open infix override fun [intersect](intersect.md)(other: [IntRange](https://kotl
 
 [jvm]  
 Brief description  
-Finds maximal [BigIntegerRange](../-big-integer-range/index.md) that is contained by both [BigIntegerRange](../-big-integer-range/index.md) and [LongRange](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-long-range/index.html) converted to [BigIntegerRange](../-big-integer-range/index.md) yielding O(1) time capacity.  
+Finds maximal [BigIntegerRange](../-big-integer-range/index.md) that is included in both [BigIntegerRange](../-big-integer-range/index.md) and [LongRange](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-long-range/index.html) converted to [BigIntegerRange](../-big-integer-range/index.md) yielding O(1) time capacity.  
   
   
 Content  

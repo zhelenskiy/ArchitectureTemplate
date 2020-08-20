@@ -371,7 +371,7 @@ open class BigIntegerProgression internal constructor(
     /**
      * Gets element by the specified [index] (since 0) (converted to [BigInteger]) or null if the [index] is out of range.
      *
-     * Null is returned if the [index] is negative or if it is not less than [count].
+     * `null` is returned if the [index] is negative or if it is not less than [count].
      *
      * Yields O(1) time capacity.
      */
@@ -380,7 +380,7 @@ open class BigIntegerProgression internal constructor(
     /**
      * Gets element by the specified [index] (since 0) or null if the index is out of range.
      *
-     * Null is returned if the [index] is negative or if it is not less than [count].
+     * `null` is returned if the [index] is negative or if it is not less than [count].
      *
      * Yields O(1) time capacity.
      */
@@ -432,7 +432,7 @@ open class BigIntegerProgression internal constructor(
 
     /**
      * Returns
-     * * null when the [progression][BigIntegerProgression] is empty
+     * * `null` when the [progression][BigIntegerProgression] is empty
      * *`Double.POSITIVE_INFINITY` if the sequence is infinite and increasing
      * *`Double.NEGATIVE_INFINITY` if the sequence is infinite and decreasing
      * * The `last` element otherwise
@@ -449,7 +449,7 @@ open class BigIntegerProgression internal constructor(
      * Gets max element yielding O(1) time capacity.
      *
      * @return
-     * * null when the [progression][BigIntegerProgression] is empty
+     * * `null` when the [progression][BigIntegerProgression] is empty
      * * `Double.POSITIVE_INFINITY` when the [progression][BigIntegerProgression] is infinite and increasing
      * * `last` when the [progression][BigIntegerProgression] is finite and increasing
      * * `first` otherwise
@@ -464,7 +464,7 @@ open class BigIntegerProgression internal constructor(
      * Gets min element yielding O(1) time capacity.
      *
      * @return
-     * * null when the [progression][BigIntegerProgression] is empty
+     * * `null` when the [progression][BigIntegerProgression] is empty
      * * `Double.NEGATIVE_INFINITY` when the [progression][BigIntegerProgression] is infinite and decreasing
      * * `last` when the [progression][BigIntegerProgression] is finite and decreasing
      * * `first` otherwise

@@ -5,7 +5,7 @@
 # times  
 [jvm]  
 Brief description  
-Redefines times operator for [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html) and [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html) instances. The purpose of the redefinition is to resolve [BigInteger] * [BigInteger] when [BigInteger] * [Number] and [Number] * [BigInteger] are defined.  
+Redefines times operator for two [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html) instances. The purpose of the redefinition is to resolve [BigInteger] * [BigInteger] when [BigInteger] * [Number] and [Number] * [BigInteger] are defined.  
   
 
 

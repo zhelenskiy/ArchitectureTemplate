@@ -6,7 +6,7 @@ title: InfiniteProgressionException -
 
 
 # InfiniteProgressionException  
- [jvm] Exception that is thrown when the called operation does not work fine only for infinite operations and it can not be stopped stop its execution (by some other [Exception](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html)).  
+ [jvm] Exception that is thrown when the called operation does not work fine only for infinite operations and it cannot stop its execution (by some other [Exception](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html)).  
   
 class [InfiniteProgressionException](index.md)(**message**: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)) : [UnsupportedOperationException](https://docs.oracle.com/javase/8/docs/api/java/lang/UnsupportedOperationException.html)   
 

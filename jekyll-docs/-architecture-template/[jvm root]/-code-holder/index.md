@@ -36,5 +36,5 @@ title: CodeHolder -
 | [name](index.md#[jvm root]/CodeHolder/name/#/PointingToDeclaration/)|  [jvm] val [name](index.md#[jvm root]/CodeHolder/name/#/PointingToDeclaration/): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)   <br>
 | [region](index.md#[jvm root]/CodeHolder/region/#/PointingToDeclaration/)|  [jvm] val [region](index.md#[jvm root]/CodeHolder/region/#/PointingToDeclaration/): [Region](../../regions/-region/index.md)   <br>
 | [shows](index.md#[jvm root]/CodeHolder/shows/#/PointingToDeclaration/)|  [jvm] val [shows](index.md#[jvm root]/CodeHolder/shows/#/PointingToDeclaration/): [Any](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)   <br>
-| [subsriptors](index.md#[jvm root]/CodeHolder/subsriptors/#/PointingToDeclaration/)|  [jvm] val [subsriptors](index.md#[jvm root]/CodeHolder/subsriptors/#/PointingToDeclaration/): [List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)<[CodeHolder]()>   <br>
+| [subscriptors](index.md#[jvm root]/CodeHolder/subscriptors/#/PointingToDeclaration/)|  [jvm] val [subscriptors](index.md#[jvm root]/CodeHolder/subscriptors/#/PointingToDeclaration/): [List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)<[CodeHolder]()>   <br>
 
