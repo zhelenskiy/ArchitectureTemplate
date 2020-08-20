@@ -158,7 +158,7 @@ open class BigIntegerProgression internal constructor(
      * Finds count of the sequence (yields O(1) time capacity assuming [BigInteger] arithmetic operations to take O(1) time).
      * @return
      * * `null` when the [sequence][BigIntegerProgression] is infinite
-     * * non-null number of elements otherwise
+     * * Non-null number of elements otherwise
      */
     fun count(): BigInteger? = when {
         isInfinite() -> null
@@ -392,7 +392,7 @@ open class BigIntegerProgression internal constructor(
     /**
      * Gets element by the specified [index] (since 0) (converted to [BigInteger]) or calls [defaultValue] with [index] if the [index] is out of range.
      *
-     * The [defaultValue] is returned if the [index] is negative or if it is not less than [count].
+     * If the [index] is negative or not less than [count], returns result of [defaultValue] applied to [index].
      *
      * Yields O(1) time capacity.
      */

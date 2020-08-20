@@ -64,7 +64,7 @@ fun range(range: LongRange): BigIntegerRange = range(range.first, range.last)
  * [BigIntegerProgression] with `step` = 1.
  *
  * Undocumented methods are designed to specify return type ([BigIntegerRange]) statically.
- * @constructor Should be used only inside abstract function [range]. Otherwise wrong instance (basic [BigIntegerRange] instead of its ancestor) can be created and the invariants can be broken.
+ * @constructor Should be used only inside abstract function [range]. Otherwise, wrong instance (basic [BigIntegerRange] instead of its ancestor) can be created and the invariants can be broken.
  * @property first The first value of the progression
  * @param toInclusive
  * * When `null`, the progression is infinite
