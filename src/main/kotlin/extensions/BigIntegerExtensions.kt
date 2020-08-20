@@ -47,7 +47,7 @@ operator fun BigInteger.plus(number: Number): BigInteger = when (number) {
 }
 
 /**
- * Redefines `minus` operator for [BigInteger] and [BigInteger] instances.
+ * Redefines `minus` operator for two [BigInteger] instances.
  * The purpose of the redefinition is to resolve `[BigInteger] - [BigInteger]` when `[BigInteger] - [Number]` and `[Number] - [BigInteger]` are defined.
  * @receiver The first term
  * @param number The second term
@@ -57,7 +57,7 @@ operator fun BigInteger.plus(number: Number): BigInteger = when (number) {
 operator fun BigInteger.minus(number: BigInteger): BigInteger = this.toBigInteger().subtract(number)
 
 /**
- * Subtracts [Number] and [BigInteger] as two [BigInteger] instances.
+ * Subtracts [BigInteger] from [Number] interpreted as [BigInteger].
  * @receiver The first term
  * @param number The second term
  * @see BigInteger.subtract
@@ -69,7 +69,7 @@ operator fun Number.minus(number: BigInteger): BigInteger = when (this) {
 }
 
 /**
- * Subtracts [BigInteger] and [Number] as two [BigInteger] instances.
+ * Subtracts [Number] interpreted as [BigInteger] from [BigInteger].
  * @receiver The first term
  * @param number The second term
  * @see BigInteger.subtract
@@ -81,7 +81,7 @@ operator fun BigInteger.minus(number: Number): BigInteger = when (number) {
 }
 
 /**
- * Redefines `times` operator for [BigInteger] and [BigInteger] instances.
+ * Redefines `times` operator for two [BigInteger] instances.
  * The purpose of the redefinition is to resolve `[BigInteger] * [BigInteger]` when `[BigInteger] * [Number]` and `[Number] * [BigInteger]` are defined.
  * @receiver The first term
  * @param number The second term
@@ -125,7 +125,7 @@ operator fun BigInteger.times(number: Number): BigInteger = when (number) {
 operator fun BigInteger.div(number: BigInteger): BigInteger = this.toBigInteger().divide(number)
 
 /**
- * Divides [Number] and [BigInteger] as two [BigInteger] instances.
+ * Divides [Number] interpreted as [BigInteger] by [BigInteger].
  * @receiver The first term
  * @param number The second term
  * @see BigInteger.divide
@@ -137,7 +137,7 @@ operator fun Number.div(number: BigInteger): BigInteger = when (this) {
 }
 
 /**
- * Divides [BigInteger] and [Number] as two [BigInteger] instances.
+ * Divides [BigInteger] and [Number] interpreted as [BigInteger].
  * @receiver The first term
  * @param number The second term
  * @see BigInteger.divide
@@ -209,9 +209,9 @@ operator fun BigInteger.compareTo(number: Number): Int = when (number) {
 
 /**
  * Defines `rangeTo` operator for [BigInteger] and [BigInteger] instances.
- * @receiver The first number
- * @param number The border number
- * @return Ascending [sequences.BigIntegerRange] from the [this] up to [number] (inclusive)
+ * @receiver The greatest lower bound integer
+ * @param number The least upper bound integer
+ * @return Increasing [sequences.BigIntegerRange] from the [this] up to [number] (inclusive)
  * @see sequences.BigIntegerRange
  * @see IntRange
  * @see LongRange
@@ -222,9 +222,9 @@ operator fun BigInteger.rangeTo(number: BigInteger) = range(this, number)
 
 /**
  * Defines `rangeTo` operator for [Number] and [BigInteger] as for two [BigInteger] instances.
- * @receiver The first number
- * @param number The border number
- * @return Ascending [sequences.BigIntegerRange] from the [this] up to [number] (inclusive)
+ * @receiver The greatest lower bound integer
+ * @param number The least upper bound integer
+ * @return Increasing [sequences.BigIntegerRange] from [this] up to [number] (inclusive)
  * @see IntRange
  * @see LongRange
  * @see Int.rangeTo
@@ -234,9 +234,9 @@ operator fun Number.rangeTo(number: BigInteger) = range(this, number)
 
 /**
  * Defines `rangeTo` operator for [BigInteger] and [Number] as for two [BigInteger] instances.
- * @receiver The first number
- * @param number The border number
- * @return Ascending [sequences.BigIntegerRange] from the [this] up to [number] (inclusive)
+ * @receiver The greatest lower bound integer
+ * @param number The least upper bound integer
+ * @return Increasing [sequences.BigIntegerRange] from [this] up to [number] (inclusive)
  * @see IntRange
  * @see LongRange
  * @see Int.rangeTo
@@ -246,9 +246,9 @@ operator fun BigInteger.rangeTo(number: Number) = range(this, number)
 
 /**
  * Defines `until` infix function for [BigInteger] and [BigInteger] instances.
- * @receiver The first number
- * @param number The border number
- * @return Ascending [sequences.BigIntegerRange] from the [this] up to [number] (exclusive)
+ * @receiver The greatest lower bound integer
+ * @param number The least upper bound integer
+ * @return Increasing [sequences.BigIntegerRange] from [this] up to [number] (exclusive)
  * @see sequences.BigIntegerRange
  * @see IntRange
  * @see LongRange
@@ -259,9 +259,9 @@ infix fun BigInteger.until(number: BigInteger) = range(this, number.toBigInteger
 
 /**
  * Defines `until` infix function for [Number] and [BigInteger] as for two [BigInteger] instances.
- * @receiver The first number
- * @param number The border number
- * @return Ascending [sequences.BigIntegerRange] from the [this] up to [number] (exclusive)
+ * @receiver The greatest lower bound integer
+ * @param number The least upper bound integer
+ * @return Increasing [sequences.BigIntegerRange] from [this] up to [number] (exclusive)
  * @see IntRange
  * @see LongRange
  * @see Int.rangeTo
@@ -271,9 +271,9 @@ infix fun Number.until(number: BigInteger) = range(this, number.toBigInteger().d
 
 /**
  * Defines `until` infix function for [BigInteger] and [Number] as for two [BigInteger] instances.
- * @receiver The first number
- * @param number The border number
- * @return Ascending [sequences.BigIntegerRange] from the [this] up to [number] (exclusive)
+ * @receiver The greatest lower bound integer
+ * @param number The least upper bound integer
+ * @return Increasing [sequences.BigIntegerRange] from [this] up to [number] (exclusive)
  * @see IntRange
  * @see LongRange
  * @see Int.rangeTo
@@ -283,9 +283,9 @@ infix fun BigInteger.until(number: Number) = range(this, number.toBigInteger().d
 
 /**
  * Defines `downTo` infix function for [BigInteger] and [BigInteger] instances.
- * @receiver The first number
- * @param number The border number
- * @return Descending [sequences.BigIntegerProgression] from the [this] down to [number] (inclusive)
+ * @receiver The least upper bound integer
+ * @param number The greatest lower bound integer
+ * @return Decreasing [sequences.BigIntegerProgression] from the [this] down to [number] (inclusive)
  * @see sequences.BigIntegerProgression
  * @see IntProgression
  * @see LongProgression
@@ -296,9 +296,9 @@ infix fun BigInteger.downTo(number: BigInteger) = progression(this, number, -Big
 
 /**
  * Defines `downTo` infix function for [BigInteger] and [Number] as for two [BigInteger] instances.
- * @receiver The first number
- * @param number The border number
- * @return Descending [sequences.BigIntegerRange] from the [this] down to [number] (inclusive)
+ * @receiver The least upper bound integer
+ * @param number The greatest lower bound integer
+ * @return Decreasing [sequences.BigIntegerRange] from [this] down to [number] (inclusive)
  * @see IntProgression
  * @see LongProgression
  * @see Int.downTo
@@ -308,9 +308,9 @@ infix fun Number.downTo(number: BigInteger) = progression(this, number, -BigInte
 
 /**
  * Defines `downTo` infix function for [Number] and [BigInteger] as for two [BigInteger] instances.
- * @receiver The first number
- * @param number The border number
- * @return Descending [sequences.BigIntegerRange] from the [this] down to [number] (inclusive)
+ * @receiver The least upper bound integer
+ * @param number The greatest lower bound integer
+ * @return Decreasing [sequences.BigIntegerRange] from [this] down to [number] (inclusive)
  * @see IntProgression
  * @see LongProgression
  * @see Int.downTo
@@ -319,7 +319,7 @@ infix fun Number.downTo(number: BigInteger) = progression(this, number, -BigInte
 infix fun BigInteger.downTo(number: Number) = progression(this, number, -BigInteger.ONE)
 
 /**
- * Represents a mathematical positive infinity.
+ * Represents mathematical positive infinity.
  */
 object PositiveInfinity {
     /**
@@ -341,7 +341,7 @@ object PositiveInfinity {
 }
 
 /**
- * Represents a mathematical negative infinity
+ * Represents mathematical negative infinity
  */
 object NegativeInfinity {
     /**
@@ -367,24 +367,24 @@ object NegativeInfinity {
 typealias Infinity = PositiveInfinity
 
 /**
- * Infinite ascending [sequences.BigIntegerRange] starting with the given [number][this].
- * @receiver the first number
+ * Infinite increasing [sequences.BigIntegerRange] starting with the given [number][this].
+ * @receiver The first number
  * @see PositiveInfinity
  * @return [sequences.BigIntegerRange]
  */
 infix fun Number.until(@Suppress("UNUSED_PARAMETER") infinity: Infinity) = range(this.toBigInteger(), null)
 
 /**
- * Infinite ascending [sequences.BigIntegerRange] starting with the given [number][this].
- * @receiver the first number
+ * Infinite increasing [sequences.BigIntegerRange] starting with the given [number][this].
+ * @receiver The first number
  * @see PositiveInfinity
  * @return [sequences.BigIntegerRange]
  */
 operator fun Number.rangeTo(@Suppress("UNUSED_PARAMETER") infinity: Infinity) = range(this.toBigInteger(), null)
 
 /**
- * Infinite descending [sequences.BigIntegerRange] starting with the given [number][this].
- * @receiver the first number
+ * Infinite decreasing [sequences.BigIntegerRange] starting with the given [number][this].
+ * @receiver The first number
  * @see NegativeInfinity
  * @return [sequences.BigIntegerProgression]
  */
