@@ -39,7 +39,7 @@ class BigIntegerExtensionsTests {
             }.toBigInteger()
         }
         assertThrows(NoSuchMethodException::class.java) {
-            object : Number() {
+            (object : Number() {
                 override fun toByte(): Byte = badReturn()
                 override fun toChar(): Char = badReturn()
                 override fun toDouble(): Double = badReturn()
@@ -48,11 +48,21 @@ class BigIntegerExtensionsTests {
                 override fun toLong(): Long = badReturn()
                 override fun toShort(): Short = badReturn()
 
+                @Suppress("unused")
                 fun toBigInteger() = 1
-            }.toBigInteger()
+            } as Number).toBigInteger()
         }
+
         assertThrows(ArithmeticException::class.java) { 3.5.toBigInteger() }
         assertThrows(ArithmeticException::class.java) { 3.5f.toBigInteger() }
+
+        assertThrows(NumberFormatException::class.java) { Float.POSITIVE_INFINITY.toBigInteger() }
+        assertThrows(NumberFormatException::class.java) { Float.NEGATIVE_INFINITY.toBigInteger() }
+        assertThrows(NumberFormatException::class.java) { Float.NaN.toBigInteger() }
+
+        assertThrows(NumberFormatException::class.java) { Double.POSITIVE_INFINITY.toBigInteger() }
+        assertThrows(NumberFormatException::class.java) { Double.NEGATIVE_INFINITY.toBigInteger() }
+        assertThrows(NumberFormatException::class.java) { Double.NaN.toBigInteger() }
     }
 
     @Test

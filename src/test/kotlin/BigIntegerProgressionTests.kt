@@ -2,11 +2,8 @@ import extensions.*
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import sequences.*
-import java.lang.IndexOutOfBoundsException
 import java.math.BigDecimal
 import java.math.BigInteger
-import kotlin.IllegalArgumentException
-import kotlin.comparisons.naturalOrder
 
 class BigIntegerProgressionTests {
     @Test
@@ -154,14 +151,14 @@ class BigIntegerProgressionTests {
         assertEquals(negInfRes, progression(1.toBigInteger(), null, -2L))
 
         assertEquals(posInfRes, progression(1.toBigInteger(), Double.POSITIVE_INFINITY, 2L))
-        assertNotEquals(posInfRes, progression(1.toBigInteger(), Double.NEGATIVE_INFINITY, 2L))
+        assertThrows(NumberFormatException::class.java) { progression(1.toBigInteger(), Double.NEGATIVE_INFINITY, 2L) }
         assertEquals(negInfRes, progression(1.toBigInteger(), Double.NEGATIVE_INFINITY, -2L))
-        assertNotEquals(negInfRes, progression(1.toBigInteger(), Double.POSITIVE_INFINITY, -2L))
+        assertThrows(NumberFormatException::class.java) { progression(1.toBigInteger(), Double.POSITIVE_INFINITY, -2L) }
 
         assertEquals(posInfRes, progression(1.toBigInteger(), Float.POSITIVE_INFINITY, 2L))
-        assertNotEquals(posInfRes, progression(1.toBigInteger(), Float.NEGATIVE_INFINITY, 2L))
+        assertThrows(NumberFormatException::class.java) { progression(1.toBigInteger(), Float.NEGATIVE_INFINITY, 2L) }
         assertEquals(negInfRes, progression(1.toBigInteger(), Float.NEGATIVE_INFINITY, -2L))
-        assertNotEquals(negInfRes, progression(1.toBigInteger(), Float.POSITIVE_INFINITY, -2L))
+        assertThrows(NumberFormatException::class.java) { progression(1.toBigInteger(), Float.POSITIVE_INFINITY, -2L) }
     }
 
     @Test

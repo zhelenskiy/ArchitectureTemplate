@@ -12,7 +12,8 @@ import java.math.BigInteger
  * @receiver A [Number] to convert
  * @throws ArithmeticException When [Double] or [Float] input has non-null fractional part
  * @throws NoSuchMethodException When no method `[Number].toBigInteger()` found when needed or its result is not [BigInteger] instance
- * @throws Throwable When method custom `[Number].toBigInteger()` throws it.
+ * @throws NumberFormatException When conversation of [Float] and [Double] to [BigDecimal] is not possible because is `NaN` or infinite
+ * @throws Throwable When method custom `[Number].toBigInteger()` throws it
  */
 fun Number.toBigInteger(): BigInteger = when (this) {
     is BigInteger -> this
