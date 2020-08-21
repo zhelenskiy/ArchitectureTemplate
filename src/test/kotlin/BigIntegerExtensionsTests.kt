@@ -6,7 +6,8 @@ import sequences.range
 import java.math.BigInteger
 
 class BigIntegerExtensionsTests {
-    private fun<T> badReturn() : T = throw Exception()
+    private fun <T> badReturn(): T = throw Exception()
+
     @Test
     fun `'to'-functions`() {
         val big = BigInteger.ONE
@@ -117,23 +118,55 @@ class BigIntegerExtensionsTests {
     fun `operators and infix generating functions`() {
         assertEquals(range(1, null), 1..Infinity)
         assertEquals(range(1, null), 1..+Infinity)
+        assertEquals(range(1, null), 1..PositiveInfinity)
         assertEquals(range(1, null), 1..-NegativeInfinity)
         assertEquals(range(1, null), 1..Infinity)
         assertEquals(progression(1, null, 1), 1..Infinity)
-        assertEquals(progression(1, null, 1), 1..Infinity)
+        assertEquals(progression(1, null, 1), 1..PositiveInfinity)
         assertEquals(progression(1, 5, 1), 1..5.toBigInteger())
         assertEquals(progression(1, 5, 1), 1.toBigInteger()..5)
 
         assertEquals(range(1, null), 1 until Infinity)
         assertEquals(progression(1, null, 1), 1 until Infinity)
-        assertEquals(progression(1, null, 1), 1 until Infinity)
+        assertEquals(progression(1, null, 1), 1 until PositiveInfinity)
         assertEquals(progression(1, 5, 1), 1 until 6.toBigInteger())
         assertEquals(progression(1, 5, 1), 1.toBigInteger() until 6)
 
         assertEquals(progression(5, 1, -1), 5L downTo 1.toBigInteger())
         assertEquals(progression(5, 1, -1), 5L.toBigInteger() downTo 1)
         assertEquals(progression(5, null, -1), 5L downTo NegativeInfinity)
+        assertEquals(progression(5, null, -1), 5L downTo Infinity)
         assertEquals(progression(5, null, -1), 5L downTo +NegativeInfinity)
         assertEquals(progression(5, null, -1), 5L downTo -Infinity)
+        assertEquals(progression(5, null, -1), 5L downTo -PositiveInfinity)
+    }
+
+    @Suppress("NonAsciiCharacters")
+    @Test
+    fun `+∞`() {
+        assertEquals("+∞", PositiveInfinity.toString())
+        assertEquals("-∞", NegativeInfinity.toString())
+        assertEquals("∞", Infinity.toString())
+        assertSame(PositiveInfinity, +Infinity)
+        assertSame(NegativeInfinity, -Infinity)
+        assertSame(PositiveInfinity, +PositiveInfinity)
+        assertSame(NegativeInfinity, -PositiveInfinity)
+        assertSame(NegativeInfinity, +NegativeInfinity)
+        assertSame(PositiveInfinity, -NegativeInfinity)
+
+        val inf = Infinity
+        assertSame(+inf, +inf + +inf)
+        assertSame(+inf, +inf * +inf)
+        assertSame(-inf, +inf * -inf)
+        assertSame(+inf, +inf - -inf)
+
+        assertSame(-inf, -inf + -inf)
+        assertSame(-inf, -inf * +inf)
+        assertSame(+inf, -inf * -inf)
+        assertSame(-inf, -inf - +inf)
+
+        assertNotEquals(Infinity::class.java, PositiveInfinity::class.java)
+        assertNotEquals(Infinity::class.java, NegativeInfinity::class.java)
+        assertNotEquals(PositiveInfinity::class.java, NegativeInfinity::class.java)
     }
 }

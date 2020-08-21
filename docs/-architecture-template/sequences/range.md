@@ -32,7 +32,7 @@ jvm
 |  Name|  Summary| 
 |---|---|
 | first| [Number](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html) to start the [BigIntegerRange](-big-integer-range/index.md) with. Will be converted to [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html).
-| last| <ul><li>When null, Double.POSITIVE_INFINITY or Float.POSITIVE_INFINITY, the resulting [BigIntegerRange](-big-integer-range/index.md) is infinite</li><li>Otherwise, it is a [Number](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html) to end the [BigIntegerRange](-big-integer-range/index.md) with. Will be converted to [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html).</li></ul>
+| last| <ul><li>When null, Double.POSITIVE_INFINITY or Float.POSITIVE_INFINITY, the resulting [BigIntegerRange](-big-integer-range/index.md) is infinite</li><li>When Double.NEGATIVE_INFINITY or Float.NEGATIVE_INFINITY, the resulting [BigIntegerRange](-big-integer-range/index.md) is empty</li><li>Otherwise, it is a [Number](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html) to end the [BigIntegerRange](-big-integer-range/index.md) with. Will be converted to [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html).</li></ul>
   
   
 Content  

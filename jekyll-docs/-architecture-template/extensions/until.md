@@ -142,6 +142,7 @@ jvm
   
   
 Content  
+infix fun [Number](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html).[until](until.md)(infinity: [Infinity](-infinity/index.md)): [BigIntegerRange](../sequences/-big-integer-range/index.md)  
 infix fun [Number](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html).[until](until.md)(infinity: [PositiveInfinity](-positive-infinity/index.md)): [BigIntegerRange](../sequences/-big-integer-range/index.md)  
 
 

@@ -151,14 +151,14 @@ class BigIntegerProgressionTests {
         assertEquals(negInfRes, progression(1.toBigInteger(), null, -2L))
 
         assertEquals(posInfRes, progression(1.toBigInteger(), Double.POSITIVE_INFINITY, 2L))
-        assertThrows(NumberFormatException::class.java) { progression(1.toBigInteger(), Double.NEGATIVE_INFINITY, 2L) }
+        assertSame(EmptyRange, progression(1.toBigInteger(), Double.NEGATIVE_INFINITY, 2L))
         assertEquals(negInfRes, progression(1.toBigInteger(), Double.NEGATIVE_INFINITY, -2L))
-        assertThrows(NumberFormatException::class.java) { progression(1.toBigInteger(), Double.POSITIVE_INFINITY, -2L) }
+        assertSame(EmptyRange, progression(1.toBigInteger(), Double.POSITIVE_INFINITY, -2L))
 
         assertEquals(posInfRes, progression(1.toBigInteger(), Float.POSITIVE_INFINITY, 2L))
-        assertThrows(NumberFormatException::class.java) { progression(1.toBigInteger(), Float.NEGATIVE_INFINITY, 2L) }
+        assertSame(EmptyRange, progression(1.toBigInteger(), Float.NEGATIVE_INFINITY, 2L))
         assertEquals(negInfRes, progression(1.toBigInteger(), Float.NEGATIVE_INFINITY, -2L))
-        assertThrows(NumberFormatException::class.java) { progression(1.toBigInteger(), Float.POSITIVE_INFINITY, -2L) }
+        assertSame(EmptyRange, progression(1.toBigInteger(), Float.POSITIVE_INFINITY, -2L))
     }
 
     @Test

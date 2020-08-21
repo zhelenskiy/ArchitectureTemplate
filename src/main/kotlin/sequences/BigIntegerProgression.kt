@@ -5,10 +5,8 @@ import sequences.EmptyRange.toString
 import java.io.Serializable
 import java.math.BigDecimal
 import java.math.BigInteger
-import java.util.SortedSet
-import kotlin.Comparator
+import java.util.*
 import kotlin.NoSuchElementException
-import kotlin.collections.HashSet
 import kotlin.math.sign
 
 /**
@@ -77,7 +75,9 @@ fun progression(progression: LongProgression): BigIntegerProgression = progressi
  * @param toInclusive
  * * When `null`, the progression is infinite
  * * When equals to `Double.POSITIVE_INFINITY` or `Float.POSITIVE_INFINITY` and [step] is positive, the progression is infinite
+ * * When equals to `Double.POSITIVE_INFINITY` or `Float.POSITIVE_INFINITY` and [step] is negative, the progression is empty
  * * When equals to `Double.NEGATIVE_INFINITY` or `Float.NEGATIVE_INFINITY` and [step] is negative, the progression is infinite
+ * * When equals to `Double.NEGATIVE_INFINITY` or `Float.NEGATIVE_INFINITY` and [step] is positive, the progression is empty
  * * When converted to [BigInteger] [step] is positive, the least upper bound integer
  * * When converted to [BigInteger] [step] is negative, the greatest lower bound integer
  * @throws IllegalArgumentException When [step] is 0
@@ -87,10 +87,11 @@ fun progression(progression: LongProgression): BigIntegerProgression = progressi
 fun progression(first: Number, toInclusive: Number?, step: Number): BigIntegerProgression = progression(
     first.toBigInteger(),
     toInclusive
-        .takeUnless {
+        ?.takeUnless {
             it is Double && it.isInfinite() && it.sign.toInt() == step.toBigInteger().signum()
                     || it is Float && it.isInfinite() && it.sign.toInt() == step.toBigInteger().signum()
         }
+        ?.let { if (it is Double && it.isInfinite() || it is Float && it.isInfinite()) first.toBigInteger() - step else it }
         ?.toBigInteger(),
     step.toBigInteger()
 )

@@ -337,6 +337,7 @@ infix fun BigInteger.downTo(number: Number) = progression(this, number, -BigInte
 /**
  * Represents mathematical positive infinity.
  */
+@Suppress("UNUSED_PARAMETER")
 object PositiveInfinity {
     /**
      * +(+∞) = +∞
@@ -353,12 +354,33 @@ object PositiveInfinity {
     /**
      * +∞
      */
-    override fun toString() = "+∞"
+    override fun toString() = "+$Infinity"
+
+    /**
+     * +∞ + +∞ = +∞
+     */
+    operator fun plus(positiveInfinity: PositiveInfinity) = PositiveInfinity
+
+    /**
+     * +∞ * +∞ = +∞
+     */
+    operator fun times(positiveInfinity: PositiveInfinity) = PositiveInfinity
+
+    /**
+     * +∞ * -∞ = -∞
+     */
+    operator fun times(negativeInfinity: NegativeInfinity) = NegativeInfinity
+
+    /**
+     * +∞ - -∞ = +∞
+     */
+    operator fun minus(negativeInfinity: NegativeInfinity) = PositiveInfinity
 }
 
 /**
  * Represents mathematical negative infinity
  */
+@Suppress("UNUSED_PARAMETER")
 object NegativeInfinity {
     /**
      * +(-∞) = -∞
@@ -375,12 +397,47 @@ object NegativeInfinity {
     /**
      * -∞
      */
-    override fun toString() = "-∞"
+    override fun toString() = "-$Infinity"
+
+    /**
+     * -∞ + -∞ = -∞
+     */
+    operator fun plus(negativeInfinity: NegativeInfinity) = NegativeInfinity
+    /**
+     * -∞ * +∞ = -∞
+     */
+    operator fun times(positiveInfinity: PositiveInfinity) = NegativeInfinity
+    /**
+     * -∞ * -∞ = +∞
+     */
+    operator fun times(negativeInfinity: NegativeInfinity) = PositiveInfinity
+    /**
+     * -∞ - +∞ = -∞
+     */
+    operator fun minus(positiveInfinity: PositiveInfinity) = NegativeInfinity
 }
+
 /**
- * [∞][Infinity] is assumed to be [+∞][PositiveInfinity] by default in mathematics.
+ * Represents mathematical unsigned infinity.
  */
-typealias Infinity = PositiveInfinity
+object Infinity {
+    /**
+     * +∞
+     * @return [+∞][PositiveInfinity]
+     */
+    operator fun unaryPlus() = PositiveInfinity
+
+    /**
+     * -∞
+     * @return [-∞][NegativeInfinity]
+     */
+    operator fun unaryMinus() = NegativeInfinity
+
+    /**
+     * ∞
+     */
+    override fun toString() = "∞"
+}
 
 /**
  * Infinite increasing [sequences.BigIntegerRange] starting with the given [number][this].
@@ -396,7 +453,23 @@ infix fun Number.until(@Suppress("UNUSED_PARAMETER") infinity: Infinity) = range
  * @see PositiveInfinity
  * @return [sequences.BigIntegerRange]
  */
+infix fun Number.until(@Suppress("UNUSED_PARAMETER") infinity: PositiveInfinity) = range(this.toBigInteger(), null)
+
+/**
+ * Infinite increasing [sequences.BigIntegerRange] starting with the given [number][this].
+ * @receiver The first number
+ * @see PositiveInfinity
+ * @return [sequences.BigIntegerRange]
+ */
 operator fun Number.rangeTo(@Suppress("UNUSED_PARAMETER") infinity: Infinity) = range(this.toBigInteger(), null)
+
+/**
+ * Infinite increasing [sequences.BigIntegerRange] starting with the given [number][this].
+ * @receiver The first number
+ * @see PositiveInfinity
+ * @return [sequences.BigIntegerRange]
+ */
+operator fun Number.rangeTo(@Suppress("UNUSED_PARAMETER") infinity: PositiveInfinity) = range(this.toBigInteger(), null)
 
 /**
  * Infinite decreasing [sequences.BigIntegerRange] starting with the given [number][this].
@@ -405,4 +478,13 @@ operator fun Number.rangeTo(@Suppress("UNUSED_PARAMETER") infinity: Infinity) = 
  * @return [sequences.BigIntegerProgression]
  */
 infix fun Number.downTo(@Suppress("UNUSED_PARAMETER") negativeInfinity: NegativeInfinity) =
+    progression(this, null, -BigInteger.ONE)
+
+/**
+ * Infinite decreasing [sequences.BigIntegerRange] starting with the given [number][this].
+ * @receiver The first number
+ * @see NegativeInfinity
+ * @return [sequences.BigIntegerProgression]
+ */
+infix fun Number.downTo(@Suppress("UNUSED_PARAMETER") negativeInfinity: Infinity) =
     progression(this, null, -BigInteger.ONE)

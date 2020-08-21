@@ -75,9 +75,12 @@ data class Cell(val row: BigInteger, val column: BigInteger) : RectangularRegion
     operator fun rangeTo(other: Cell): RectangularRegion = region(this.row..other.row, this.column..other.column)
     operator fun rangeTo(@Suppress("UNUSED_PARAMETER") infinity: Infinity): RectangularRegion =
         region(row..Infinity, column..Infinity)
+    operator fun rangeTo(@Suppress("UNUSED_PARAMETER") infinity: PositiveInfinity): RectangularRegion =
+        rangeTo(Infinity)
 
     infix fun until(other: Cell): RectangularRegion = region(this.row until other.row, this.column until other.column)
     infix fun until(@Suppress("UNUSED_PARAMETER") infinity: Infinity): RectangularRegion = this..Infinity
+    infix fun until(@Suppress("UNUSED_PARAMETER") infinity: PositiveInfinity): RectangularRegion = this..Infinity
 
     infix fun downTo(other: Cell): RectangularRegion = other..this
 }
@@ -192,7 +195,11 @@ open class RowPiece internal constructor(val row: BigInteger, columns: BigIntege
     operator fun rangeTo(@Suppress("UNUSED_PARAMETER") infinity: Infinity): RectangularRegion =
         region(this.row..Infinity, columns)
 
+    operator fun rangeTo(@Suppress("UNUSED_PARAMETER") infinity: PositiveInfinity): RectangularRegion =
+        region(this.row..Infinity, columns)
+
     infix fun until(@Suppress("UNUSED_PARAMETER") infinity: Infinity): RectangularRegion = this..Infinity
+    infix fun until(@Suppress("UNUSED_PARAMETER") infinity: PositiveInfinity): RectangularRegion = this..Infinity
 
     infix fun intersect(columnPiece: ColumnPiece) =
         Cell(row, columnPiece.column).takeIf { it in this && it in columnPiece }
@@ -220,8 +227,11 @@ open class ColumnPiece internal constructor(rows: BigIntegerRange, val column: B
 
     operator fun rangeTo(@Suppress("UNUSED_PARAMETER") infinity: Infinity): RectangularRegion =
         region(rows, this.column..Infinity)
+    operator fun rangeTo(@Suppress("UNUSED_PARAMETER") infinity: PositiveInfinity): RectangularRegion =
+        region(rows, this.column..Infinity)
 
     infix fun until(@Suppress("UNUSED_PARAMETER") infinity: Infinity): RectangularRegion = this..Infinity
+    infix fun until(@Suppress("UNUSED_PARAMETER") infinity: PositiveInfinity): RectangularRegion = this..Infinity
 
     infix fun intersect(rowPiece: RowPiece) = Cell(rowPiece.row, column).takeIf { it in rowPiece && it in this }
 

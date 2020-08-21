@@ -140,6 +140,7 @@ jvm
   
 Content  
 infix fun [Number](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html).[downTo](down-to.md)(negativeInfinity: [NegativeInfinity](-negative-infinity/index.md)): [BigIntegerProgression](../sequences/-big-integer-progression/index.md)  
+infix fun [Number](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html).[downTo](down-to.md)(negativeInfinity: [Infinity](-infinity/index.md)): [BigIntegerProgression](../sequences/-big-integer-progression/index.md)  
 
 
 

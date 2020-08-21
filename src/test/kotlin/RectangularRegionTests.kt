@@ -1,4 +1,5 @@
 import extensions.Infinity
+import extensions.PositiveInfinity
 import extensions.rangeTo
 import extensions.toBigInteger
 import org.junit.jupiter.api.Assertions.*
@@ -102,7 +103,9 @@ class RectangularRegionTests {
                         )
 
         assertEquals(region(2..Infinity, 3..Infinity), Cell(2, 3)..Infinity)
+        assertEquals(region(2..Infinity, 3..Infinity), Cell(2, 3)..PositiveInfinity)
         assertEquals(region(2..Infinity, 3..Infinity), Cell(2, 3) until Infinity)
+        assertEquals(region(2..Infinity, 3..Infinity), Cell(2, 3) until PositiveInfinity)
 
         assertEquals("Cell(row=2, column=3)", Cell(2, 3).toString())
     }

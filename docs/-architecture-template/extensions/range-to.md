@@ -139,6 +139,7 @@ jvm
   
   
 Content  
+operator fun [Number](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html).[rangeTo](range-to.md)(infinity: [Infinity](-infinity/index.md)): [BigIntegerRange](../sequences/-big-integer-range/index.md)  
 operator fun [Number](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html).[rangeTo](range-to.md)(infinity: [PositiveInfinity](-positive-infinity/index.md)): [BigIntegerRange](../sequences/-big-integer-range/index.md)  
 
 

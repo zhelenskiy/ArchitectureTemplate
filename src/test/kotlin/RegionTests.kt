@@ -1,4 +1,5 @@
 import extensions.Infinity
+import extensions.PositiveInfinity
 import extensions.rangeTo
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
@@ -48,7 +49,9 @@ class RegionTests {
         assertTrue(Region(Cell(5, 5), Cell(1, 3)..Cell(3, 4)).isFinite())
         assertFalse(Region(Cell(5, 5), Cell(1, 3)..Cell(3, 4)).isInfinite())
         assertFalse(Region(Cell(5, 5), Cell(1, 3)..Cell(3, 4), region(2, 100..Infinity)).isFinite())
+        assertFalse(Region(Cell(5, 5), Cell(1, 3)..Cell(3, 4), region(2, 100..PositiveInfinity)).isFinite())
         assertTrue(Region(Cell(5, 5), Cell(1, 3)..Cell(3, 4), region(2, 100..Infinity)).isInfinite())
+        assertTrue(Region(Cell(5, 5), Cell(1, 3)..Cell(3, 4), region(2, 100..PositiveInfinity)).isInfinite())
     }
 
     @Test

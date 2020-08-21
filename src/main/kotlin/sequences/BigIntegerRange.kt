@@ -1,6 +1,9 @@
 package sequences
 
-import extensions.*
+import extensions.Infinity
+import extensions.rangeTo
+import extensions.toBigInteger
+import extensions.until
 import java.math.BigInteger
 
 /**
@@ -13,6 +16,7 @@ import java.math.BigInteger
  * @param first [Number] to start the [BigIntegerRange] with. Will be converted to [BigInteger].
  * @param last
  * * When `null`, `Double.POSITIVE_INFINITY` or `Float.POSITIVE_INFINITY`, the resulting [BigIntegerRange] is infinite
+ * * When `Double.NEGATIVE_INFINITY` or `Float.NEGATIVE_INFINITY`, the resulting [BigIntegerRange] is empty
  * * Otherwise, it is a [Number] to end the [BigIntegerRange] with. Will be converted to [BigInteger].
  * @see IntRange
  * @see LongRange
@@ -20,6 +24,7 @@ import java.math.BigInteger
 fun range(first: Number, last: Number?): BigIntegerRange = range(
     first.toBigInteger(),
     last?.takeUnless { it == Double.POSITIVE_INFINITY || it == Float.POSITIVE_INFINITY }
+        ?.let { if (it == Double.NEGATIVE_INFINITY || it == Float.NEGATIVE_INFINITY) first.toBigInteger().dec() else it }
         ?.toBigInteger()
 )
 

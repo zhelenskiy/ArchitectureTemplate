@@ -92,7 +92,7 @@ jvm
 |---|---|
 | first| The first value (after conversation to [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html)) of the progression (unless it is empty)
 | step| Non-null value (after conversation to [BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html)) to be added to calculate the next element
-| toInclusive| <ul><li>When null, the progression is infinite</li><li>When equals to Double.POSITIVE_INFINITY or Float.POSITIVE_INFINITY and [step]() is positive, the progression is infinite</li><li>When equals to Double.NEGATIVE_INFINITY or Float.NEGATIVE_INFINITY and [step]() is negative, the progression is infinite</li><li>When converted to [BigInteger]() is positive, the least upper bound integer</li><li>When converted to [BigInteger]() is negative, the greatest lower bound integer</li></ul>
+| toInclusive| <ul><li>When null, the progression is infinite</li><li>When equals to Double.POSITIVE_INFINITY or Float.POSITIVE_INFINITY and [step]() is positive, the progression is infinite</li><li>When equals to Double.POSITIVE_INFINITY or Float.POSITIVE_INFINITY and [step]() is negative, the progression is empty</li><li>When equals to Double.NEGATIVE_INFINITY or Float.NEGATIVE_INFINITY and [step]() is negative, the progression is infinite</li><li>When equals to Double.NEGATIVE_INFINITY or Float.NEGATIVE_INFINITY and [step]() is positive, the progression is empty</li><li>When converted to [BigInteger]() is positive, the least upper bound integer</li><li>When converted to [BigInteger]() is negative, the greatest lower bound integer</li></ul>
   
   
 Content  
