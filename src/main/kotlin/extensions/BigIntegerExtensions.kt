@@ -2,15 +2,30 @@ package extensions
 
 import sequences.progression
 import sequences.range
+import java.math.BigDecimal
 import java.math.BigInteger
 
 /**
- * Converts a [Number] to [BigInteger] using [Long] representation as intermediate.
+ * Converts a [Number] to [BigInteger] using [Long], [Double], [BigDecimal] representations as intermediate or custom `[Number].toBigInteger()` method.
  *
  * @return Converted [BigInteger]
  * @receiver A [Number] to convert
+ * @throws ArithmeticException When [Double] or [Float] input has non-null fractional part
+ * @throws NoSuchMethodException When no method `[Number].toBigInteger()` found when needed or its result is not [BigInteger] instance
+ * @throws Throwable When method custom `[Number].toBigInteger()` throws it.
  */
-fun Number.toBigInteger(): BigInteger = if (this is BigInteger) this else BigInteger.valueOf(this.toLong())
+fun Number.toBigInteger(): BigInteger = when (this) {
+    is BigInteger -> this
+    is BigDecimal -> toBigIntegerExact()
+    is Double -> BigDecimal.valueOf(this).toBigIntegerExact()
+    is Float -> toDouble().toBigInteger()
+    is Byte -> BigInteger.valueOf(this.toLong())
+    is Short -> BigInteger.valueOf(this.toLong())
+    is Int -> BigInteger.valueOf(this.toLong())
+    is Long -> BigInteger.valueOf(this)
+    else -> this::class.java.getMethod("toBigInteger").invoke(this) as? BigInteger
+        ?: throw NoSuchMethodException("Bad return type: BigInteger expected")
+}
 
 /**
  * Redefines `plus` operator for [BigInteger] and [BigInteger] instances.

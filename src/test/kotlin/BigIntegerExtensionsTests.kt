@@ -6,11 +6,53 @@ import sequences.range
 import java.math.BigInteger
 
 class BigIntegerExtensionsTests {
+    private fun<T> badReturn() : T = throw Exception()
     @Test
     fun `'to'-functions`() {
         val big = BigInteger.ONE
         assertSame(big, big.toBigInteger())
         assertEquals(big, 1.toBigInteger().toBigInteger())
+        assertEquals(big, 1L.toBigInteger())
+        assertEquals(big, 1.0.toBigInteger())
+        assertEquals(big, 1.0f.toBigInteger())
+        assertEquals(big, object : Number() {
+            override fun toByte(): Byte = badReturn()
+            override fun toChar(): Char = badReturn()
+            override fun toDouble(): Double = badReturn()
+            override fun toFloat(): Float = badReturn()
+            override fun toInt(): Int = badReturn()
+            override fun toLong(): Long = badReturn()
+            override fun toShort(): Short = badReturn()
+
+            fun toBigInteger() = BigInteger.ONE
+
+        }.toBigInteger())
+        assertThrows(NoSuchMethodException::class.java) {
+            object : Number() {
+                override fun toByte(): Byte = badReturn()
+                override fun toChar(): Char = badReturn()
+                override fun toDouble(): Double = badReturn()
+                override fun toFloat(): Float = badReturn()
+                override fun toInt(): Int = badReturn()
+                override fun toLong(): Long = badReturn()
+                override fun toShort(): Short = badReturn()
+            }.toBigInteger()
+        }
+        assertThrows(NoSuchMethodException::class.java) {
+            object : Number() {
+                override fun toByte(): Byte = badReturn()
+                override fun toChar(): Char = badReturn()
+                override fun toDouble(): Double = badReturn()
+                override fun toFloat(): Float = badReturn()
+                override fun toInt(): Int = badReturn()
+                override fun toLong(): Long = badReturn()
+                override fun toShort(): Short = badReturn()
+
+                fun toBigInteger() = 1
+            }.toBigInteger()
+        }
+        assertThrows(ArithmeticException::class.java) { 3.5.toBigInteger() }
+        assertThrows(ArithmeticException::class.java) { 3.5f.toBigInteger() }
     }
 
     @Test
