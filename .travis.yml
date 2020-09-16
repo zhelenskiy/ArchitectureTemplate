@@ -5,4 +5,5 @@ os: linux
 dist: trusty
 jdk: oraclejdk14
 script:
+  - export MAVEN_OPTS="-Xmx100m"
   - ./gradlew build
